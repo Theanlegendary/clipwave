@@ -20,6 +20,18 @@ template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'template
 app = Flask(__name__, template_folder=template_dir)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,POST,OPTIONS'
+    return response
+
+@app.route('/api/info', methods=['OPTIONS'])
+@app.route('/api/download', methods=['OPTIONS'])
+def options_cors():
+    return '', 204
+
 # Base directory for temporary downloads
 TEMP_CACHE_DIR = os.path.join(tempfile.gettempdir(), 'social_video_dl_cache')
 os.makedirs(TEMP_CACHE_DIR, exist_ok=True)
