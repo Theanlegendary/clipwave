@@ -1,0 +1,7 @@
+.vercel
+venv/
+__pycache__/
+*.pyc
+cloudflared.exe
+*.log
+test_*

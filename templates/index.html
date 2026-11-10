@@ -1,0 +1,1419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ seo.title if seo else 'Clipwave — Best Free Online Video Downloader (YouTube, TikTok, Instagram, MP4/MP3)' }}</title>
+<meta name="description" content="{{ seo.meta_desc if seo else 'Clipwave is the fastest free online video downloader. Download high quality 1080p, 720p MP4 videos & MP3 audio from YouTube, TikTok, Instagram Reels, Facebook, and Twitter/X with no sign-up or software required.' }}">
+<meta name="keywords" content="video downloader, youtube video downloader, tiktok downloader without watermark, download youtube shorts, instagram reels downloader, twitter video downloader, x video download, facebook video saver, free mp4 downloader, youtube to mp3 high quality, clipwave, y2mate alternative, savefrom alternative">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="Clipwave">
+<link rel="canonical" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://social-video-downloader-ruby.vercel.app/">
+<meta property="og:title" content="Clipwave — Best Free Online Video Downloader">
+<meta property="og:description" content="Save any video in seconds! Fast, free, no sign-up required. Download YouTube, TikTok, Reels, & Twitter in 1080p MP4 or MP3.">
+<meta property="og:site_name" content="Clipwave">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://social-video-downloader-ruby.vercel.app/">
+<meta name="twitter:title" content="Clipwave — Best Free Online Video Downloader">
+<meta name="twitter:description" content="Download YouTube, TikTok, and social media videos in seconds in Full HD MP4 & MP3.">
+
+<!-- Mobile Theme Color & PWA App Manifest -->
+<meta name="theme-color" content="#BDE7FF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Clipwave">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
+<link rel="manifest" href="/manifest.json">
+
+<!-- JSON-LD Structured Data Schema for Google Search Engine Rankings -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://social-video-downloader-ruby.vercel.app/#webapp",
+      "name": "Clipwave Free Video Downloader",
+      "url": "https://social-video-downloader-ruby.vercel.app/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All (Windows, macOS, iOS, Android, Linux)",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "128400"
+      },
+      "description": "Fast free online tool to download videos and audio from YouTube, TikTok, Instagram, Twitter/X, and Facebook in MP4 or MP3."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://social-video-downloader-ruby.vercel.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What kind of links work on Clipwave?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clipwave supports links to public videos from YouTube, YouTube Shorts, TikTok without watermark, Instagram Reels, Twitter/X, Facebook, and Reddit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which formats can I choose?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can download high definition MP4 videos (1080p, 720p, 480p, 360p) or audio only as high quality MP3 (192kbps) and M4A."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need an account or software installation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No account, sign-up, or software installation is required. Everything runs directly inside your web browser on mobile and desktop."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect x='3' y='3' width='38' height='38' rx='12' fill='%23FF4F93' stroke='%231B1B3A' stroke-width='3'/%3E%3Cpath d='M17 14 L31 22 L17 30 Z' fill='%23FFFFFF' stroke='%231B1B3A' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M33 8 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6z' fill='%23FFD93D' stroke='%231B1B3A' stroke-width='1.5'/%3E%3C/svg%3E">
+<style>
+  /* ============ Design tokens ============ */
+  :root{
+    --ink:#1B1B3A;
+    --accent:#FF4F93;
+    --yellow:#FFD93D;
+    --sky:#BDE7FF;
+    --purple:#7B5CFF;
+    --cream:#FFF8EE;
+    --muted:#2A2A52;
+    --green:#059669;
+    --green-bright:#10b981;
+  }
+ 
+  /* ============ Live Moving Animations ============ */
+  @keyframes floatBubble {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-9px); }
+  }
+  .live-bubble {
+    animation: floatBubble 2.8s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  @keyframes starTwinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(14deg); filter: drop-shadow(0 0 8px #FFD93D); }
+  }
+  .live-star {
+    animation: starTwinkle 2.5s ease-in-out infinite;
+    transform-origin: 150px 200px;
+  }
+  @keyframes pulseBadge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 6px var(--accent)); }
+  }
+  .live-badge {
+    animation: pulseBadge 2.2s ease-in-out infinite;
+    transform-origin: 76px 112px;
+  }
+  @keyframes sparkleSpin {
+    0%, 100% { transform: scale(0.9) rotate(0deg); opacity: 0.6; }
+    50% { transform: scale(1.15) rotate(45deg); opacity: 1; }
+  }
+  .live-sparkle {
+    animation: sparkleSpin 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+  .live-eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 18px;
+    margin-left: 8px;
+  }
+  .live-eq span {
+    width: 3.5px;
+    background: var(--ink);
+    border-radius: 2px;
+    animation: eqBounce 1s ease-in-out infinite alternate;
+  }
+  .live-eq span:nth-child(1) { height: 7px; animation-delay: 0.1s; }
+  .live-eq span:nth-child(2) { height: 16px; animation-delay: 0.35s; }
+  .live-eq span:nth-child(3) { height: 10px; animation-delay: 0.2s; }
+  .live-eq span:nth-child(4) { height: 15px; animation-delay: 0.45s; }
+  @keyframes eqBounce {
+    0% { height: 5px; }
+    100% { height: 18px; background: var(--accent); }
+  }
+  @keyframes driftParticle {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    15% { opacity: 0.75; }
+    85% { opacity: 0.75; }
+    100% { transform: translateY(-380px) translateX(60px) rotate(360deg); opacity: 0; }
+  }
+  .particle {
+    position: absolute;
+    pointer-events: none;
+    animation: driftParticle 9s linear infinite;
+  }
+ 
+  /* ============ Base ============ */
+  *{box-sizing:border-box}
+  html{
+    scroll-behavior:smooth;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'M PLUS Rounded 1c',system-ui,sans-serif;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  button,input{font-family:inherit}
+  button{cursor:pointer}
+  h1,h2,h3,p{margin:0}
+  h1,h2,h3,.display{font-family:'Dela Gothic One',sans-serif;font-weight:400}
+  .container{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  input:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:4px solid #4A35D9;outline-offset:3px}
+  .accent-fill{fill:var(--accent)}
+  .halftone{background-color:var(--sky);background-image:radial-gradient(#fff 2px,transparent 2.2px);background-size:16px 16px}
+  .halftone-pink{background-color:#FFE4EF;background-image:radial-gradient(#FF8FB8 2px,transparent 2.2px);background-size:16px 16px}
+  .pop{transition:transform .12s,box-shadow .12s}
+  .pop:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink) !important}
+  .bg-yellow{background:#FFE066}.bg-sky{background:var(--sky)}.bg-lilac{background:#D9CFFF}.bg-pink{background:#FFD6E8}
+ 
+  /* ============ Nav ============ */
+  .nav{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding-top: max(24px, env(safe-area-inset-top));
+  }
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Dela Gothic One',sans-serif;font-size:26px}
+  .nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:26px}
+  .nav-links a{
+    font-family:'Dela Gothic One',sans-serif;
+    font-size:16px;
+    letter-spacing:0.02em;
+    color:var(--ink);
+    text-transform:uppercase;
+    transition:color .12s, transform .12s;
+  }
+  .nav-links a:hover{
+    color:var(--accent);
+    transform:translateY(-2px);
+  }
+  .btn-pill{
+    font-family:'Dela Gothic One',sans-serif !important;
+    font-size:15px !important;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    padding:10px 24px;
+    border-radius:999px;
+    background:var(--yellow);
+    border:3px solid var(--ink);
+    box-shadow:4px 4px 0 var(--ink);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+ 
+  /* ============ Hero ============ */
+  .hero{border-bottom:4px solid var(--ink)}
+  .hero-inner{display:flex;flex-wrap:wrap;align-items:center;gap:48px;padding-top:56px;padding-bottom:72px}
+  .hero-copy{flex:1 1 500px;min-width:0;display:flex;flex-direction:column;gap:24px}
+  .hero-art{flex:1 1 380px;min-width:0;display:flex;justify-content:center}
+  .hero-art svg{width:100%;max-width:500px;height:auto}
+  .badge{align-self:flex-start;display:flex;align-items:center;gap:10px;padding:8px 16px;border-radius:999px;background:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-size:15px;font-weight:800;transform:rotate(-2deg)}
+  .badge .jp{color:var(--accent)}
+  h1{font-size:clamp(38px,5.6vw,68px);line-height:1.12;letter-spacing:-.02em;text-shadow:4px 4px 0 #fff}
+  h1 .hl{color:var(--accent);-webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--ink)}
+  .lead{max-width:520px;font-size:19px;line-height:1.6;font-weight:500;color:var(--muted)}
+ 
+  .url-box{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px;border-radius:24px;background:#fff;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+  .url-field{flex:1 1 240px;min-width:0;display:flex;align-items:center;gap:12px;padding:0 10px}
+  .url-field input{flex:1 1 auto;min-width:0;height:54px;border:0;background:transparent;font-size:17px;font-weight:500;color:var(--ink);outline:none}
+  .btn-paste{height:36px;padding:0 14px;border-radius:10px;background:#FFF8EE;border:2px solid var(--ink);font-size:14px;font-weight:800;color:var(--ink)}
+  .btn-download{flex:0 0 auto;height:54px;padding:0 28px;border:3px solid var(--ink);border-radius:16px;background:var(--accent);color:#fff;font-size:18px;font-weight:800;display:flex;align-items:center;gap:10px;box-shadow:4px 4px 0 var(--ink)}
+  .status{min-height:24px;font-size:16px;font-weight:700}
+ 
+  /* ============ SPLIT DROPDOWN LOGIC & BUTTON (AS REQUESTED) ============ */
+  .result-card-container {
+    max-width: 1000px;
+    margin: 0 auto 72px auto;
+    display: none;
+    animation: slideDown 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .result-card {
+    background: #FFFFFF;
+    border: 4px solid var(--ink);
+    border-radius: 28px;
+    box-shadow: 10px 10px 0 var(--ink);
+    overflow: visible;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .result-thumb-box {
+    flex: 0 0 320px;
+    height: 220px;
+    position: relative;
+    background: #000;
+    border-right: 4px solid var(--ink);
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+    overflow: hidden;
+  }
+  .result-thumb-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .result-duration {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--ink);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 12px;
+    border: 2px solid #fff;
+  }
+  .result-info {
+    flex: 1 1 360px;
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+  .result-meta-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .platform-badge {
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    font-weight: 800;
+    font-size: 13px;
+  }
+  .author-label {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .result-title {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: clamp(17px, 2vw, 21px);
+    line-height: 1.35;
+    color: var(--ink);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* The Exact Split Button Component (matching the screenshots) */
+  .split-dropdown-box {
+    display: inline-flex;
+    align-items: stretch;
+    position: relative;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 4px 4px 0 var(--ink);
+    background: #fff;
+    width: fit-content;
+  }
+  .split-btn-download {
+    background: #00A859;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 12px 28px;
+    border: 0;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .split-btn-download:hover {
+    background: #008f4c;
+  }
+  .split-btn-dropdown-toggle {
+    background: #FFFFFF;
+    color: #00A859;
+    font-size: 17px;
+    font-weight: 800;
+    padding: 12px 18px;
+    border: 0;
+    border-left: 3px solid var(--ink);
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .split-btn-dropdown-toggle:hover {
+    background: #F0FDF4;
+  }
+  .split-btn-dropdown-toggle svg {
+    transition: transform 0.2s;
+  }
+  .split-btn-dropdown-toggle.open svg {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown Menu Popup (Matching Image 2) */
+  .custom-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 230px;
+    background: #FFFFFF;
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 6px 6px 0 var(--ink);
+    z-index: 999;
+    display: none;
+    overflow: hidden;
+    animation: fadeInMenu 0.12s ease-out;
+  }
+  @keyframes fadeInMenu {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .custom-dropdown-menu.active {
+    display: block;
+  }
+  .dropdown-choice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-bottom: 1px solid #E2E8F0;
+    color: #00A859;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .dropdown-choice:last-child {
+    border-bottom: 0;
+  }
+  .dropdown-choice:hover {
+    background: #F0FDF4;
+  }
+  .dropdown-choice.selected {
+    background: #E6F8EF;
+    font-weight: 800;
+  }
+  .dropdown-choice .choice-format {
+    font-weight: 800;
+  }
+  .dropdown-choice .choice-res {
+    color: #475569;
+    font-size: 14px;
+  }
+  .dl-status-notice {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ink);
+    background: #FFF4D0;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 2px solid var(--ink);
+    display: none;
+  }
+
+  /* ================= LOADING CARD (MATCHING USER SCREENSHOT) ================= */
+  .loading-card-container {
+    padding: 0 24px 36px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .loading-card {
+    background: #FFFFFF;
+    border: 3.5px solid var(--ink);
+    border-radius: 28px;
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 46px 36px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 24px;
+    animation: fadeInLoadingCard 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes fadeInLoadingCard {
+    from { opacity: 0; transform: translateY(12px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Circular Radar / Spinner with Orbiting Dots */
+  .radar-box {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .radar-ripple {
+    position: absolute;
+    border-radius: 50%;
+    box-sizing: border-box;
+  }
+  .radar-ripple.r1 {
+    width: 126px;
+    height: 126px;
+    border: 2px solid rgba(59, 130, 246, 0.25);
+    animation: pulseRing 2s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+  }
+  .radar-ripple.r2 {
+    width: 100px;
+    height: 100px;
+    border: 2.5px solid rgba(59, 130, 246, 0.45);
+    animation: pulseRing 2s cubic-bezier(0.2, 0.8, 0.4, 1) infinite 0.4s;
+  }
+  .radar-ripple.r3 {
+    width: 76px;
+    height: 76px;
+    border: 2px solid rgba(59, 130, 246, 0.65);
+  }
+  @keyframes pulseRing {
+    0% { transform: scale(0.88); opacity: 0.3; }
+    50% { transform: scale(1.08); opacity: 0.9; }
+    100% { transform: scale(0.88); opacity: 0.3; }
+  }
+
+  /* Orbiting Dots exactly like user screenshot */
+  .orbit-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: #2563EB;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+  }
+  .orbit-dot.od1 {
+    width: 8px;
+    height: 8px;
+    top: 10px;
+    left: 48%;
+    animation: floatDotA 2.2s ease-in-out infinite alternate;
+  }
+  .orbit-dot.od2 {
+    width: 9px;
+    height: 9px;
+    top: 30px;
+    right: 18px;
+    animation: floatDotB 2s ease-in-out infinite alternate 0.3s;
+  }
+  .orbit-dot.od3 {
+    width: 8px;
+    height: 8px;
+    left: 12px;
+    top: 56%;
+    animation: floatDotA 1.8s ease-in-out infinite alternate 0.6s;
+  }
+  .orbit-dot.od4 {
+    width: 6px;
+    height: 6px;
+    right: 28px;
+    top: 65%;
+    animation: floatDotB 2.4s ease-in-out infinite alternate 0.9s;
+  }
+  @keyframes floatDotA {
+    0% { transform: translateY(0) scale(0.9); opacity: 0.7; }
+    100% { transform: translateY(-6px) scale(1.2); opacity: 1; }
+  }
+  @keyframes floatDotB {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    100% { transform: translateY(5px) scale(1.3); opacity: 1; }
+  }
+
+  .radar-center-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    background: #EFF6FF;
+    border: 2px solid #BFDBFE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    animation: centerBounce 2s ease-in-out infinite;
+  }
+  @keyframes centerBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  /* Progress Bar matching user image */
+  .loading-progress-track {
+    width: 100%;
+    max-width: 360px;
+    height: 10px;
+    background: #F1F5F9;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #E2E8F0;
+  }
+  .loading-progress-bar {
+    height: 100%;
+    width: 18%;
+    background: linear-gradient(90deg, #2563EB, #60A5FA);
+    border-radius: 999px;
+    transition: width 0.4s ease-out;
+  }
+
+  /* Status text with animated typing dots */
+  .loading-status-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+  .animated-dots {
+    display: inline-flex;
+    letter-spacing: 2px;
+  }
+  .animated-dots span {
+    animation: dotPulse 1.4s infinite;
+    opacity: 0.2;
+    color: #2563EB;
+    font-size: 18px;
+  }
+  .animated-dots span:nth-child(1) { animation-delay: 0s; }
+  .animated-dots span:nth-child(2) { animation-delay: 0.25s; }
+  .animated-dots span:nth-child(3) { animation-delay: 0.5s; }
+  @keyframes dotPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+  }
+
+  /* Perks and Options */
+  .options{display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+  .seg{display:flex;gap:6px;padding:5px;border-radius:16px;background:#fff;border:3px solid var(--ink)}
+  .seg button{height:40px;padding:0 20px;border:0;border-radius:10px;font-size:16px;font-weight:800;background:transparent;color:var(--ink);transition:all .12s}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--yellow)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips button{height:42px;padding:0 18px;border-radius:999px;font-size:16px;font-weight:800;background:#fff;color:var(--ink);border:3px solid var(--ink);transition:all .12s}
+  .chips button[aria-pressed="true"]{background:var(--yellow);box-shadow:3px 3px 0 var(--ink)}
+  .perks{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:16px;font-weight:700}
+  .perks span{display:flex;align-items:center;gap:8px}
+ 
+  /* Marquee Infinite Running Ribbon */
+  .ribbon{
+    background:var(--ink);
+    color:var(--yellow);
+    border-bottom:4px solid var(--ink);
+    padding:14px 0;
+    overflow:hidden;
+    white-space:nowrap;
+    font-family:'Dela Gothic One',sans-serif;
+    font-size:22px;
+    letter-spacing:.04em;
+    display:flex;
+    user-select:none;
+  }
+  .marquee-track{
+    display:flex;
+    width:max-content;
+    animation:scrollMarquee 20s linear infinite;
+  }
+  .marquee-content{
+    display:flex;
+    flex-shrink:0;
+    align-items:center;
+  }
+  @keyframes scrollMarquee{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-50%)}
+  }
+ 
+  /* Sections */
+  .band{border-bottom:4px solid var(--ink)}
+  .section{display:flex;flex-direction:column;gap:48px;padding-top:96px;padding-bottom:96px}
+  .section-head{display:flex;flex-direction:column;gap:14px;max-width:640px}
+  .tag{align-self:flex-start;padding:6px 14px;border-radius:10px;background:var(--ink);color:var(--yellow);font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transform:rotate(-2deg)}
+  h2{font-size:clamp(30px,4.4vw,50px);line-height:1.15;letter-spacing:-.02em}
+ 
+  .grid-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+  .step{display:flex;flex-direction:column;gap:18px;padding:30px;border-radius:28px;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+  .step-top{display:flex;align-items:center;justify-content:space-between}
+  .step-icon{width:60px;height:60px;border-radius:50%;background:#fff;border:4px solid var(--ink);display:flex;align-items:center;justify-content:center}
+  .step-num{font-family:'Dela Gothic One',sans-serif;font-size:52px}
+  .step h3{font-size:24px}
+  .step p,.feature p{font-size:16px;line-height:1.6;font-weight:500;color:var(--muted)}
+ 
+  .grid-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+  .feature{display:flex;gap:18px;padding:26px;border-radius:24px;background:#fff;border:4px solid var(--ink)}
+  .feature .ic{flex:0 0 auto;width:52px;height:52px;border-radius:16px;border:3px solid var(--ink);display:flex;align-items:center;justify-content:center}
+  .feature .body{display:flex;flex-direction:column;gap:6px}
+  .feature h3{font-size:20px}
+  .feature p{font-size:15px}
+  .sh-pink{box-shadow:6px 6px 0 var(--accent)}.sh-purple{box-shadow:6px 6px 0 var(--purple)}.sh-yellow{box-shadow:6px 6px 0 var(--yellow)}.sh-cyan{box-shadow:6px 6px 0 #3BC8FF}
+ 
+  /* FAQ */
+  .faq{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:36px;padding:0 24px 96px}
+  .faq-list{display:flex;flex-direction:column;gap:16px}
+  details{padding:22px 26px;border-radius:22px;background:#fff;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+  summary{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:18px;font-weight:800;list-style:none;cursor:pointer}
+  summary::-webkit-details-marker{display:none}
+  .faq-plus{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .2s}
+  details[open] .faq-plus{transform:rotate(45deg)}
+  details p{margin-top:14px;font-size:16px;line-height:1.65;font-weight:500;color:var(--muted)}
+ 
+  /* CTA + footer */
+  .cta-wrap{padding-bottom:96px}
+  .cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;padding:64px 40px;border-radius:40px;background:#4A35D9;color:#fff;border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink)}
+  .cta-text{flex:1 1 400px;display:flex;flex-direction:column;gap:14px}
+  .cta h2{font-size:clamp(28px,4vw,44px)}
+  .cta p{font-size:18px;line-height:1.6;font-weight:500;color:#E8E4FF}
+  .cta a{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:18px 32px;border-radius:18px;background:var(--yellow);color:var(--ink);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);font-size:19px;font-weight:800}
+  footer{background:var(--ink);color:var(--cream)}
+  .footer-inner{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:20px;padding-top:36px;padding-bottom:48px}
+  footer .logo{font-size:22px}
+  footer p{max-width:560px;font-size:14px;line-height:1.7;color:#D9D6EE}
+
+  @media(max-width: 768px) {
+    .result-thumb-box {
+      flex: 1 1 100%;
+      height: 200px;
+      border-right: 0;
+      border-bottom: 4px solid var(--ink);
+      border-top-right-radius: 24px;
+      border-bottom-left-radius: 0;
+    }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- ================= HERO ================= -->
+<div class="hero halftone" id="top" style="position: relative; overflow: hidden;">
+  <!-- Live Drifting Floating Particles -->
+  <div class="particle" style="bottom: 40px; left: 6%; font-size: 22px;">✨</div>
+  <div class="particle" style="bottom: 80px; left: 42%; font-size: 20px; animation-delay: 3.5s;">🌸</div>
+  <div class="particle" style="bottom: 60px; right: 10%; font-size: 22px; animation-delay: 5s;">⭐</div>
+  <div class="particle" style="bottom: 120px; right: 32%; font-size: 18px; animation-delay: 2s;">✨</div>
+  <header class="container nav">
+    <a href="#top" class="logo">
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><rect x="3" y="3" width="38" height="38" rx="12" class="accent-fill" stroke="#1B1B3A" stroke-width="3"/><path d="M17 14 L31 22 L17 30 Z" fill="#fff" stroke="#1B1B3A" stroke-width="2.5" stroke-linejoin="round"/><path d="M33 8 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6z" fill="#FFD93D" stroke="#1B1B3A" stroke-width="1.5"/></svg>
+      Clipwave
+      <div class="live-eq" title="Live Ready">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <button type="button" id="pwaInstallBtn" style="display: none; align-items: center; gap: 6px; padding: 7px 18px; border-radius: 999px; background: var(--yellow); color: var(--ink); border: 2.5px solid var(--ink); font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 2.5px 2.5px 0 var(--ink); transition: transform 0.15s;">
+        <span>📲</span> Install App
+      </button>
+      <a href="#get" class="btn-pill pop">Start</a>
+    </nav>
+  </header>
+ 
+  <main class="container hero-inner" id="get">
+    <div class="hero-copy">
+      <div class="badge"><span class="jp" aria-hidden="true">ダウンロード</span> Free video saver</div>
+      <h1>{{ seo.h1_top if seo else 'Save any video.' }}<br><span class="hl">{{ seo.h1_hl if seo else 'Keep it forever!' }}</span></h1>
+      <p class="lead">{{ seo.subtitle if seo else 'Paste a link, pick your power level, and download. No sign-up, no software, no side quests.' }}</p>
+ 
+      <form class="url-box" id="dl-form" novalidate>
+        <label for="video-url" class="sr-only">Video link</label>
+        <div class="url-field">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+          <input id="video-url" type="url" placeholder="Paste your video link here" autocomplete="off">
+          <button type="button" id="pasteBtn" class="btn-paste pop">Paste</button>
+        </div>
+        <button type="submit" id="btnDownload" class="btn-download pop">
+          <span id="btnText">Download</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg>
+        </button>
+      </form>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+ 
+      <div class="options">
+        <div class="seg" role="group" aria-label="Format" data-key="format">
+          <button type="button" aria-pressed="true">MP4</button>
+          <button type="button" aria-pressed="false">MP3</button>
+        </div>
+        <div class="chips" role="group" aria-label="Quality" data-key="quality">
+          <button type="button" aria-pressed="false">480p</button>
+          <button type="button" aria-pressed="true">720p</button>
+          <button type="button" aria-pressed="false">1080p</button>
+        </div>
+      </div>
+ 
+      <div class="perks">
+        <span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFD93D" stroke="#1B1B3A" stroke-width="2.4"/><path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Free to use</span>
+        <span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFD93D" stroke="#1B1B3A" stroke-width="2.4"/><path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No account needed</span>
+        <span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFD93D" stroke="#1B1B3A" stroke-width="2.4"/><path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Phone and desktop</span>
+      </div>
+
+      <!-- SEO Platform Tags for Google Search Ranking -->
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;" aria-label="Supported Platforms">
+        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #DC2626;">YouTube & Shorts</span>
+        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #0891B2;">TikTok No Watermark</span>
+        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #DB2777;">Instagram Reels</span>
+        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #0284C7;">Twitter / X</span>
+        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #2563EB;">Facebook</span>
+      </div>
+    </div>
+ 
+    <!-- Original mascot illustration -->
+    <div class="hero-art">
+      <svg viewBox="0 0 460 560" role="img" aria-label="Anime Mascot">
+        <circle cx="230" cy="280" r="205" fill="#FFE066" stroke="#1B1B3A" stroke-width="5"/>
+        <g stroke="#1B1B3A" stroke-width="3" opacity="0.14" stroke-linecap="round">
+          <line x1="230" y1="280" x2="230" y2="90"/><line x1="230" y1="280" x2="365" y2="145"/><line x1="230" y1="280" x2="420" y2="280"/><line x1="230" y1="280" x2="365" y2="415"/><line x1="230" y1="280" x2="95" y2="415"/><line x1="230" y1="280" x2="40" y2="280"/><line x1="230" y1="280" x2="95" y2="145"/>
+        </g>
+        <path d="M122 250 C58 270 34 380 66 470 C100 440 130 380 146 310 Z" fill="#7B5CFF" stroke="#1B1B3A" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M338 250 C402 270 426 380 394 470 C360 440 330 380 314 310 Z" fill="#7B5CFF" stroke="#1B1B3A" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M80 420 C84 440 90 455 100 462" fill="none" stroke="#1B1B3A" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+        <path d="M380 420 C376 440 370 455 360 462" fill="none" stroke="#1B1B3A" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+        <path d="M140 560 C140 480 170 430 230 424 C290 430 320 480 320 560 Z" class="accent-fill" stroke="#1B1B3A" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M200 430 L230 482 L260 430" fill="#fff" stroke="#1B1B3A" stroke-width="4" stroke-linejoin="round"/>
+        <line x1="214" y1="486" x2="214" y2="530" stroke="#1B1B3A" stroke-width="4" stroke-linecap="round"/>
+        <line x1="246" y1="486" x2="246" y2="526" stroke="#1B1B3A" stroke-width="4" stroke-linecap="round"/>
+        <rect x="212" y="392" width="36" height="40" rx="10" fill="#FFE3D1" stroke="#1B1B3A" stroke-width="4"/>
+        <ellipse cx="230" cy="290" rx="112" ry="102" fill="#FFE3D1" stroke="#1B1B3A" stroke-width="5"/>
+        <path d="M114 292 C106 170 176 128 232 130 C300 130 356 176 346 292 C338 246 320 216 296 204 C284 238 262 250 244 214 C226 246 196 244 178 206 C150 222 124 250 114 292 Z" fill="#7B5CFF" stroke="#1B1B3A" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M170 168 C190 150 224 144 246 150" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+        <g class="live-star">
+          <path d="M150 190 l7 15 16 7 -16 7 -7 15 -7 -15 -16 -7 16 -7z" fill="#FFD93D" stroke="#1B1B3A" stroke-width="3.5" stroke-linejoin="round"/>
+        </g>
+        <ellipse cx="180" cy="296" rx="25" ry="33" fill="#1B1B3A"/><ellipse cx="180" cy="302" rx="19" ry="25" fill="#3BC8FF"/><ellipse cx="180" cy="310" rx="12" ry="12" fill="#1B6FB8" opacity="0.7"/>
+        <circle cx="171" cy="289" r="9" fill="#fff"/><circle cx="190" cy="313" r="4.5" fill="#fff"/>
+        <ellipse cx="280" cy="296" rx="25" ry="33" fill="#1B1B3A"/><ellipse cx="280" cy="302" rx="19" ry="25" fill="#3BC8FF"/><ellipse cx="280" cy="310" rx="12" ry="12" fill="#1B6FB8" opacity="0.7"/>
+        <circle cx="271" cy="289" r="9" fill="#fff"/><circle cx="290" cy="313" r="4.5" fill="#fff"/>
+        <path d="M150 276 C160 258 186 256 204 266" fill="none" stroke="#1B1B3A" stroke-width="5" stroke-linecap="round"/>
+        <path d="M256 266 C274 256 300 258 310 276" fill="none" stroke="#1B1B3A" stroke-width="5" stroke-linecap="round"/>
+        <ellipse cx="146" cy="336" rx="19" ry="10" fill="#FF8FB8" opacity="0.75"/><ellipse cx="314" cy="336" rx="19" ry="10" fill="#FF8FB8" opacity="0.75"/>
+        <path d="M212 340 Q221 354 230 340 Q239 354 248 340" fill="none" stroke="#1B1B3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- live speech bubble -->
+        <g class="live-bubble">
+          <path d="M290 64 h120 a20 20 0 0 1 20 20 v38 a20 20 0 0 1 -20 20 h-58 l-26 24 l4 -24 h-40 a20 20 0 0 1 -20 -20 v-38 a20 20 0 0 1 20 -20z" fill="#fff" stroke="#1B1B3A" stroke-width="4.5" stroke-linejoin="round"/>
+          <text x="350" y="108" text-anchor="middle" font-family="'Dela Gothic One', sans-serif" font-size="26" fill="#1B1B3A">Saved!</text>
+        </g>
+        <!-- live play badge -->
+        <g class="live-badge">
+          <circle cx="76" cy="112" r="40" class="accent-fill" stroke="#1B1B3A" stroke-width="5"/>
+          <polygon points="66,92 66,132 100,112" fill="#fff" stroke="#1B1B3A" stroke-width="4" stroke-linejoin="round"/>
+        </g>
+        <!-- live sparkles -->
+        <g class="live-sparkle">
+          <path d="M410 250 l7 18 18 7 -18 7 -7 18 -7 -18 -18 -7 18 -7z" fill="#fff" stroke="#1B1B3A" stroke-width="3.5" stroke-linejoin="round"/>
+        </g>
+        <g class="live-sparkle" style="animation-delay: 1.5s;">
+          <path d="M40 300 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5z" fill="#fff" stroke="#1B1B3A" stroke-width="3" stroke-linejoin="round"/>
+        </g>
+        <path d="M392 470 l6 14 14 6 -14 6 -6 14 -6 -14 -14 -6 14 -6z" fill="#FFD93D" stroke="#1B1B3A" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="120" cy="60" rx="11" ry="7" transform="rotate(-30 120 60)" fill="#FFB3D1" stroke="#1B1B3A" stroke-width="2.5"/>
+        <ellipse cx="250" cy="34" rx="11" ry="7" transform="rotate(25 250 34)" fill="#FFB3D1" stroke="#1B1B3A" stroke-width="2.5"/>
+        <ellipse cx="430" cy="360" rx="11" ry="7" transform="rotate(-50 430 360)" fill="#FFB3D1" stroke="#1B1B3A" stroke-width="2.5"/>
+        <ellipse cx="22" cy="400" rx="11" ry="7" transform="rotate(40 22 400)" fill="#FFB3D1" stroke="#1B1B3A" stroke-width="2.5"/>
+      </svg>
+    </div>
+  </main>
+
+  <!-- ================= LOADING STATE CARD (MATCHING USER SCREENSHOT) ================= -->
+  <div class="container loading-card-container" id="loadingCardArea" style="display: none;">
+    <div class="loading-card">
+      <div class="radar-box">
+        <!-- Concentric ripples -->
+        <div class="radar-ripple r1"></div>
+        <div class="radar-ripple r2"></div>
+        <div class="radar-ripple r3"></div>
+        
+        <!-- Orbiting accent dots from screenshot -->
+        <div class="orbit-dot od1"></div>
+        <div class="orbit-dot od2"></div>
+        <div class="orbit-dot od3"></div>
+        <div class="orbit-dot od4"></div>
+
+        <!-- Center Icon Circle with Download Arrow -->
+        <div class="radar-center-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Animated Progress Bar -->
+      <div class="loading-progress-track">
+        <div class="loading-progress-bar" id="loadProgressBar"></div>
+      </div>
+
+      <!-- Loading Status Text -->
+      <div class="loading-status-text">
+        <span id="loadingStatusMsg">Fetching video info</span><span class="animated-dots"><span>.</span><span>.</span><span>.</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= VIDEO RESULT CARD WITH SPLIT DROPDOWN BUTTON ================= -->
+  <div class="container result-card-container" id="resultCardArea">
+    <div class="result-card">
+      <div class="result-thumb-box">
+        <img id="cardThumb" src="" alt="Video thumbnail">
+        <span class="result-duration" id="cardDuration">0:00</span>
+      </div>
+
+      <div class="result-info">
+        <div class="result-meta-tag">
+          <span class="platform-badge" id="cardPlatform">YouTube</span>
+          <span class="author-label" id="cardAuthor">Creator</span>
+        </div>
+        
+        <h3 class="result-title" id="cardTitle">Video Title</h3>
+
+        <!-- THE SPLIT DROPDOWN BUTTON (AS REQUESTED) -->
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px;">
+          <div class="split-dropdown-box" id="splitBtnWrapper">
+            <!-- Left part: Download Action Button -->
+            <button type="button" class="split-btn-download" onclick="executeCurrentDownload()">
+              Download
+            </button>
+            
+            <!-- Right part: Quality Dropdown Toggle -->
+            <button type="button" class="split-btn-dropdown-toggle" id="dropdownToggleBtn" onclick="toggleFormatDropdown(event)">
+              <span id="selectedLabel">MP4 720</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+
+            <!-- Dropdown Menu List -->
+            <div class="custom-dropdown-menu" id="customDropdownMenu">
+              <div class="dropdown-choice" onclick="selectDropdownOption('1080p', 'MP4 1080')">
+                <span class="choice-format">MP4</span>
+                <span class="choice-res">1080 (HD)</span>
+              </div>
+              <div class="dropdown-choice selected" onclick="selectDropdownOption('720p', 'MP4 720')">
+                <span class="choice-format">MP4</span>
+                <span class="choice-res">720</span>
+              </div>
+              <div class="dropdown-choice" onclick="selectDropdownOption('480p', 'MP4 480')">
+                <span class="choice-format">MP4</span>
+                <span class="choice-res">480</span>
+              </div>
+              <div class="dropdown-choice" onclick="selectDropdownOption('360p', 'MP4 360')">
+                <span class="choice-format">MP4</span>
+                <span class="choice-res">360</span>
+              </div>
+              <div class="dropdown-choice" onclick="selectDropdownOption('audio', 'Audio MP3')">
+                <span class="choice-format">Audio MP3</span>
+                <span class="choice-res">192k</span>
+              </div>
+              <div class="dropdown-choice" onclick="selectDropdownOption('m4a', 'Audio M4A')">
+                <span class="choice-format">Audio M4A</span>
+                <span class="choice-res">128k</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dl-status-notice" id="dlStatusNotice">
+            ⏳ Preparing file on server... your download will start in a few seconds!
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+ 
+<div class="ribbon" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-content">
+      <span>FAST ★ FREE ★ NO SIGN-UP ★ MP4 + MP3 ★ TIKTOK ★ YOUTUBE ★ INSTAGRAM ★ TWITTER/X ★ HD READY ★&nbsp;</span>
+      <span>FAST ★ FREE ★ NO SIGN-UP ★ MP4 + MP3 ★ TIKTOK ★ YOUTUBE ★ INSTAGRAM ★ TWITTER/X ★ HD READY ★&nbsp;</span>
+    </div>
+    <div class="marquee-content" aria-hidden="true">
+      <span>FAST ★ FREE ★ NO SIGN-UP ★ MP4 + MP3 ★ TIKTOK ★ YOUTUBE ★ INSTAGRAM ★ TWITTER/X ★ HD READY ★&nbsp;</span>
+      <span>FAST ★ FREE ★ NO SIGN-UP ★ MP4 + MP3 ★ TIKTOK ★ YOUTUBE ★ INSTAGRAM ★ TWITTER/X ★ HD READY ★&nbsp;</span>
+    </div>
+  </div>
+</div>
+ 
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how" class="band halftone-pink">
+  <div class="container section">
+    <div class="section-head">
+      <div class="tag">Episode 1 · How it works</div>
+      <h2>Three steps. About ten seconds.</h2>
+    </div>
+    <div class="grid-steps">
+      <article class="step bg-yellow">
+        <div class="step-top">
+          <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></div>
+          <div class="step-num">01</div>
+        </div>
+        <h3>Paste the link</h3>
+        <p>Copy the address of a public video and drop it into the box.</p>
+      </article>
+      <article class="step bg-sky">
+        <div class="step-top">
+          <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10"/><path d="M18 7h2"/><circle cx="16" cy="7" r="2"/><path d="M4 17h2"/><path d="M10 17h10"/><circle cx="8" cy="17" r="2"/></svg></div>
+          <div class="step-num">02</div>
+        </div>
+        <h3>Choose your format</h3>
+        <p>Pick video or audio only, then select the quality for your device.</p>
+      </article>
+      <article class="step bg-lilac">
+        <div class="step-top">
+          <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></div>
+          <div class="step-num">03</div>
+        </div>
+        <h3>Download and enjoy</h3>
+        <p>Tap Download and the file lands on your device, ready for offline watching.</p>
+      </article>
+    </div>
+  </div>
+</section>
+ 
+<!-- ================= FEATURES ================= -->
+<section id="features" class="container section">
+  <div class="section-head">
+    <div class="tag">Power-ups</div>
+    <h2>Built to be quick and simple.</h2>
+  </div>
+  <div class="grid-features">
+    <article class="feature sh-pink">
+      <div class="ic bg-yellow"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" stroke="#1B1B3A" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+      <div class="body"><h3>Fast processing</h3><p>Paste, choose, download. No waiting rooms and no extra pages in the way.</p></div>
+    </article>
+    <article class="feature sh-purple">
+      <div class="ic bg-sky"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="#fff"/><path d="M7 15v-6"/><path d="M7 12h3"/><path d="M10 9v6"/><path d="M14 15V9h2.5a1.5 1.5 0 0 1 0 3H14"/></svg></div>
+      <div class="body"><h3>HD quality options</h3><p>Choose the resolution the source offers, from small files to full HD.</p></div>
+    </article>
+    <article class="feature sh-yellow">
+      <div class="ic bg-pink"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="#fff"/><circle cx="18" cy="16" r="3" fill="#fff"/></svg></div>
+      <div class="body"><h3>Video or audio only</h3><p>Keep the whole clip as MP4, or save just the sound as MP3.</p></div>
+    </article>
+    <article class="feature sh-cyan">
+      <div class="ic bg-lilac"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="3" fill="#fff"/><path d="M11 18h2"/></svg></div>
+      <div class="body"><h3>Made for every screen</h3><p>A layout that feels as good on a phone as it does on a wide desktop.</p></div>
+    </article>
+    <article class="feature sh-pink">
+      <div class="ic bg-yellow"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M3 3l18 18"/></svg></div>
+      <div class="body"><h3>No sign-up</h3><p>No account, no email, no password. Open the page and start.</p></div>
+    </article>
+    <article class="feature sh-purple">
+      <div class="ic bg-sky"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9-8 11-4.6-2-8-6-8-11V5z" fill="#fff"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></div>
+      <div class="body"><h3>Clear and calm</h3><p>A clean page with no pop-ups fighting for attention while you work.</p></div>
+    </article>
+  </div>
+</section>
+ 
+<!-- ================= VS OLD DOWNLOADERS (SAVEFROM ALTERNATIVE) ================= -->
+<section class="container" style="padding-bottom: 96px;" id="compare">
+  <div style="background: #FFFFFF; border: 4px solid var(--ink); border-radius: 36px; box-shadow: 10px 10px 0 var(--ink); padding: 48px 36px;">
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 36px auto;">
+      <div class="tag" style="margin: 0 auto 12px auto;">SaveFrom Alternative</div>
+      <h2 style="font-size: clamp(26px, 3.8vw, 42px); line-height: 1.2;">Why users are switching to Clipwave</h2>
+      <p style="font-size: 17px; color: var(--muted); margin-top: 8px;">No pop-up ads, no fake download buttons, and zero malware risk.</p>
+    </div>
+
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: separate; border-spacing: 0; border: 3px solid var(--ink); border-radius: 20px; overflow: hidden; font-size: 16px;">
+        <thead>
+          <tr style="background: var(--ink); color: #fff; font-family: 'Dela Gothic One', sans-serif;">
+            <th style="padding: 16px 20px; text-align: left; width: 34%;">Feature</th>
+            <th style="padding: 16px 20px; text-align: center; width: 33%; background: #FF4F93;">Clipwave</th>
+            <th style="padding: 16px 20px; text-align: center; width: 33%; background: #333355;">SaveFrom & Others</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #FFF8EE; border-bottom: 2px solid var(--ink); font-weight: 700;">
+            <td style="padding: 16px 20px; border-bottom: 2px solid var(--ink);">🛡️ Pop-up Ads & Malware</td>
+            <td style="padding: 16px 20px; text-align: center; border-bottom: 2px solid var(--ink); color: #059669; font-weight: 800;">✅ 100% Ad-Free & Safe</td>
+            <td style="padding: 16px 20px; text-align: center; border-bottom: 2px solid var(--ink); color: #DC2626;">❌ 10+ spam popups & ads</td>
+          </tr>
+          <tr style="background: #fff; border-bottom: 2px solid var(--ink); font-weight: 700;">
+            <td style="padding: 16px 20px; border-bottom: 2px solid var(--ink);">⚡ Video Download Speed</td>
+            <td style="padding: 16px 20px; text-align: center; border-bottom: 2px solid var(--ink); color: #059669; font-weight: 800;">✅ Instant Direct Download</td>
+            <td style="padding: 16px 20px; text-align: center; border-bottom: 2px solid var(--ink); color: #DC2626;">❌ Redirects & waiting delays</td>
+          </tr>
+          <tr style="background: #FFF8EE; border-bottom: 2px solid var(--ink); font-weight: 700;">
+            <td style="padding: 16px 20px; border-bottom: 2px solid var(--ink);">🎬 Quality Support</td>
+            <td style="padding: 16px 20px; text-align: center; border-bottom: 2px solid var(--ink); color: #059669; font-weight: 800;">✅ 1080p, 720p, 480p, MP3</td>
+            <td style="padding: 16px 20px; text-align: center; border-bottom: 2px solid var(--ink); color: #E11D48;">⚠️ 1080p often has no sound</td>
+          </tr>
+          <tr style="background: #fff; font-weight: 700;">
+            <td style="padding: 16px 20px;">📱 Phone & Desktop App</td>
+            <td style="padding: 16px 20px; text-align: center; color: #059669; font-weight: 800;">✅ Clean Web App (No install)</td>
+            <td style="padding: 16px 20px; text-align: center; color: #DC2626;">❌ Pushes shady APKs/extensions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="faq">
+  <div class="section-head">
+    <div class="tag">FAQ</div>
+    <h2>Good to know</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>What kind of links work?<span class="faq-plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+      <p>Links to public videos from YouTube, TikTok, Instagram, Twitter/X, and Facebook. Private or restricted videos can't be saved.</p>
+    </details>
+    <details>
+      <summary>Which formats can I choose?<span class="faq-plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+      <p>Video as MP4 (1080p, 720p, 480p, 360p), or audio as MP3 / M4A. Available qualities depend on what the source offers.</p>
+    </details>
+    <details>
+      <summary>Is it okay to download any video?<span class="faq-plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+      <p>Only save videos you own or have permission to download, and respect creators and each platform's terms.</p>
+    </details>
+    <details>
+      <summary>Do I need to install anything?<span class="faq-plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B1B3A" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+      <p>No. Everything runs on this page, on any modern phone or computer browser.</p>
+    </details>
+  </div>
+</section>
+ 
+<!-- ================= CTA ================= -->
+<div class="container cta-wrap">
+  <div class="cta">
+    <div class="cta-text">
+      <h2>Ready to save your first video?</h2>
+      <p>Paste a link and you're done in seconds.</p>
+    </div>
+    <a href="#get" class="pop">
+      Start downloading
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+ 
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container footer-inner">
+    <div class="logo">
+      <svg width="34" height="34" viewBox="0 0 44 44" aria-hidden="true"><rect x="3" y="3" width="38" height="38" rx="12" class="accent-fill" stroke="#FFF8EE" stroke-width="3"/><path d="M17 14 L31 22 L17 30 Z" fill="#fff" stroke="#1B1B3A" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      Clipwave
+    </div>
+    <p>Clipwave is not affiliated with any video platform. Download only content you own or have permission to save, and follow the terms of the original service.</p>
+  </div>
+</footer>
+
+<script>
+  // Selected quality code & label state
+  let currentTargetUrl = '';
+  let selectedQualityCode = '720p';
+  let selectedQualityLabel = 'MP4 720';
+
+  // Toggle dropdown menu
+  function toggleFormatDropdown(e) {
+    e.stopPropagation();
+    const menu = document.getElementById('customDropdownMenu');
+    const toggleBtn = document.getElementById('dropdownToggleBtn');
+    menu.classList.toggle('active');
+    toggleBtn.classList.toggle('open');
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('customDropdownMenu');
+    const toggleBtn = document.getElementById('dropdownToggleBtn');
+    if (menu && menu.classList.contains('active')) {
+      menu.classList.remove('active');
+      toggleBtn.classList.remove('open');
+    }
+  });
+
+  // Select option from dropdown
+  function selectDropdownOption(qualityCode, label) {
+    selectedQualityCode = qualityCode;
+    selectedQualityLabel = label;
+    document.getElementById('selectedLabel').textContent = label;
+
+    // Update active highlight in dropdown
+    document.querySelectorAll('.dropdown-choice').forEach(el => {
+      el.classList.toggle('selected', el.textContent.includes(label));
+    });
+
+    // Automatically trigger download on selection!
+    executeCurrentDownload();
+  }
+
+  // Execute download with live visual progress
+  function executeCurrentDownload() {
+    if (!currentTargetUrl) return;
+
+    const notice = document.getElementById('dlStatusNotice');
+    notice.style.display = 'block';
+    notice.innerHTML = `
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+        <span>⏳ Preparing <strong>${selectedQualityLabel}</strong> on server...</span>
+        <span id="dlNoticePercent" style="color: #059669; font-weight: 800;">25%</span>
+      </div>
+      <div style="width: 100%; height: 6px; background: rgba(0,0,0,0.1); border-radius: 999px; overflow: hidden;">
+        <div id="dlNoticeBar" style="height: 100%; width: 25%; background: #00A859; border-radius: 999px; transition: width 0.4s ease;"></div>
+      </div>
+    `;
+
+    const downloadUrl = `/api/download?url=${encodeURIComponent(currentTargetUrl)}&quality=${selectedQualityCode}`;
+    window.location.href = downloadUrl;
+
+    const bar = document.getElementById('dlNoticeBar');
+    const pct = document.getElementById('dlNoticePercent');
+    
+    let timer1 = setTimeout(() => { if (bar && pct) { bar.style.width = '60%'; pct.textContent = '60%'; } }, 1200);
+    let timer2 = setTimeout(() => { if (bar && pct) { bar.style.width = '88%'; pct.textContent = '88%'; } }, 3000);
+    let timer3 = setTimeout(() => {
+      if (notice) {
+        notice.innerHTML = '✅ <strong>Download started!</strong> Check your browser download shelf / folder.';
+      }
+    }, 6000);
+  }
+
+  // Paste helper
+  document.getElementById('pasteBtn').addEventListener('click', async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text) {
+        document.getElementById('video-url').value = text;
+        document.getElementById('dl-form').dispatchEvent(new Event('submit'));
+      }
+    } catch {
+      alert('Please paste directly using Ctrl+V or allow clipboard permission.');
+    }
+  });
+
+  // Hero format & quality chip listeners
+  document.querySelectorAll('.seg, .chips').forEach((group) => {
+    group.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      group.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      
+      const val = btn.textContent.trim();
+      if (val === 'MP3') {
+        selectedQualityCode = 'audio';
+        selectedQualityLabel = 'Audio MP3';
+      } else if (val === '480p') {
+        selectedQualityCode = '480p';
+        selectedQualityLabel = 'MP4 480';
+      } else if (val === '720p') {
+        selectedQualityCode = '720p';
+        selectedQualityLabel = 'MP4 720';
+      } else if (val === '1080p') {
+        selectedQualityCode = '1080p';
+        selectedQualityLabel = 'MP4 1080';
+      }
+      document.getElementById('selectedLabel').textContent = selectedQualityLabel;
+    });
+  });
+
+  // Form submission handler with Animated Loading Card
+  const form = document.getElementById('dl-form');
+  const input = document.getElementById('video-url');
+  const status = document.getElementById('status');
+  const btnDownload = document.getElementById('btnDownload');
+  const btnText = document.getElementById('btnText');
+  const resultCardArea = document.getElementById('resultCardArea');
+  const loadingCardArea = document.getElementById('loadingCardArea');
+  const loadProgressBar = document.getElementById('loadProgressBar');
+  const loadingStatusMsg = document.getElementById('loadingStatusMsg');
+
+  let loadInterval = null;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const url = input.value.trim();
+    if (!url) {
+      status.style.color = '#E11D48';
+      status.textContent = 'Please paste a valid video link.';
+      input.focus();
+      return;
+    }
+
+    // Reset status & hide previous result
+    status.textContent = '';
+    resultCardArea.style.display = 'none';
+
+    // Show Loading Card matching user screenshot
+    loadingCardArea.style.display = 'block';
+    loadProgressBar.style.width = '20%';
+    loadingStatusMsg.textContent = 'Fetching video info';
+    loadingCardArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    btnText.textContent = 'Checking...';
+    btnDownload.disabled = true;
+    btnDownload.style.opacity = '0.7';
+
+    // Realistic progress animation steps
+    let progress = 20;
+    if (loadInterval) clearInterval(loadInterval);
+    loadInterval = setInterval(() => {
+      if (progress < 85) {
+        progress += Math.floor(Math.random() * 8) + 4;
+        if (progress > 85) progress = 85;
+        loadProgressBar.style.width = progress + '%';
+        if (progress > 40 && progress < 70) {
+          loadingStatusMsg.textContent = 'Extracting video formats';
+        } else if (progress >= 70) {
+          loadingStatusMsg.textContent = 'Preparing download links';
+        }
+      }
+    }, 400);
+
+    try {
+      const res = await fetch('/api/info', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to retrieve video.');
+
+      currentTargetUrl = data.clean_url || url;
+
+      // Completion transition
+      clearInterval(loadInterval);
+      loadProgressBar.style.width = '100%';
+      loadingStatusMsg.textContent = 'Video ready!';
+
+      setTimeout(() => {
+        loadingCardArea.style.display = 'none';
+
+        // Populate Result Card with Split Dropdown
+        document.getElementById('cardThumb').src = data.thumbnail || '';
+        document.getElementById('cardTitle').textContent = data.title || 'Untitled Video';
+        document.getElementById('cardAuthor').textContent = data.author || '';
+        document.getElementById('cardDuration').textContent = data.duration || '0:00';
+        document.getElementById('cardPlatform').textContent = data.platform || 'Social Video';
+        document.getElementById('dlStatusNotice').style.display = 'none';
+
+        resultCardArea.style.display = 'block';
+        resultCardArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 350);
+
+    } catch (err) {
+      clearInterval(loadInterval);
+      loadingCardArea.style.display = 'none';
+      status.style.color = '#E11D48';
+      status.textContent = err.message;
+    } finally {
+      btnText.textContent = 'Download';
+      btnDownload.disabled = false;
+      btnDownload.style.opacity = '1';
+    }
+  });
+
+  // ================= PWA INSTALLATION & SERVICE WORKER =================
+  let deferredPrompt = null;
+  const pwaBtn = document.getElementById('pwaInstallBtn');
+
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then((reg) => {
+        console.log('Clipwave PWA Service Worker Registered', reg.scope);
+      }).catch((err) => {
+        console.log('SW Registration error:', err);
+      });
+    });
+  }
+
+  // Handle Android / Chrome / Edge install prompt
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (pwaBtn) {
+      pwaBtn.style.display = 'inline-flex';
+    }
+  });
+
+  // Handle iOS detection
+  const isIos = () => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+  };
+  const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+  if (isIos() && !isInStandaloneMode() && pwaBtn) {
+    pwaBtn.style.display = 'inline-flex';
+  }
+
+  if (pwaBtn) {
+    pwaBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          pwaBtn.style.display = 'none';
+        }
+        deferredPrompt = null;
+      } else if (isIos()) {
+        alert('To install Clipwave on iPhone / iPad:\n\n1. Tap the Share button (square with arrow up) at the bottom.\n2. Scroll down and tap "Add to Home Screen" 📲\n3. Tap "Add" in the top right!');
+      } else {
+        alert('To install Clipwave on your device, click the "Install" icon in your browser address bar.');
+      }
+    });
+  }
+
+  window.addEventListener('appinstalled', () => {
+    console.log('Clipwave PWA installed successfully!');
+    if (pwaBtn) pwaBtn.style.display = 'none';
+  });
+</script>
+</body>
+</html>
