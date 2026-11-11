@@ -323,45 +323,45 @@ def fetch_info():
             else:
                 raise first_err
             
-            if 'entries' in info and info['entries']:
-                info = info['entries'][0]
+        if 'entries' in info and info['entries']:
+            info = info['entries'][0]
 
-            duration_secs = info.get('duration')
-            duration_str = None
-            if duration_secs:
-                mins, secs = divmod(int(duration_secs), 60)
-                hours, mins = divmod(mins, 60)
-                if hours > 0:
-                    duration_str = f"{hours}:{mins:02d}:{secs:02d}"
-                else:
-                    duration_str = f"{mins}:{secs:02d}"
+        duration_secs = info.get('duration')
+        duration_str = None
+        if duration_secs:
+            mins, secs = divmod(int(duration_secs), 60)
+            hours, mins = divmod(mins, 60)
+            if hours > 0:
+                duration_str = f"{hours}:{mins:02d}:{secs:02d}"
+            else:
+                duration_str = f"{mins}:{secs:02d}"
 
-            # Detect platform
-            extractor = str(info.get('extractor_key', 'Generic')).lower()
-            platform_name = "Social Video"
-            if 'youtube' in extractor:
-                platform_name = "YouTube"
-            elif 'tiktok' in extractor:
-                platform_name = "TikTok"
-            elif 'instagram' in extractor:
-                platform_name = "Instagram"
-            elif 'twitter' in extractor or 'x' in extractor:
-                platform_name = "Twitter / X"
-            elif 'facebook' in extractor:
-                platform_name = "Facebook"
-            elif 'reddit' in extractor:
-                platform_name = "Reddit"
-            elif 'pinterest' in extractor:
-                platform_name = "Pinterest"
+        # Detect platform
+        extractor = str(info.get('extractor_key', 'Generic')).lower()
+        platform_name = "Social Video"
+        if 'youtube' in extractor:
+            platform_name = "YouTube"
+        elif 'tiktok' in extractor:
+            platform_name = "TikTok"
+        elif 'instagram' in extractor:
+            platform_name = "Instagram"
+        elif 'twitter' in extractor or 'x' in extractor:
+            platform_name = "Twitter / X"
+        elif 'facebook' in extractor:
+            platform_name = "Facebook"
+        elif 'reddit' in extractor:
+            platform_name = "Reddit"
+        elif 'pinterest' in extractor:
+            platform_name = "Pinterest"
 
-            return jsonify({
-                'title': info.get('title') or "Untitled Video",
-                'thumbnail': info.get('thumbnail') or "",
-                'duration': duration_str or "Video",
-                'author': info.get('uploader') or info.get('channel') or "Unknown Creator",
-                'platform': platform_name,
-                'clean_url': target_url,
-            })
+        return jsonify({
+            'title': info.get('title') or "Untitled Video",
+            'thumbnail': info.get('thumbnail') or "",
+            'duration': duration_str or "Video",
+            'author': info.get('uploader') or info.get('channel') or "Unknown Creator",
+            'platform': platform_name,
+            'clean_url': target_url,
+        })
 
     except Exception as e:
         error_msg = str(e)
@@ -468,10 +468,11 @@ def download():
                     info = ydl_fallback.extract_info(target_url, download=True)
             else:
                 raise first_dl_err
-            if 'entries' in info and info['entries']:
-                info = info['entries'][0]
-            raw_title = info.get('title', 'downloaded_video')
-            safe_title = sanitize_filename(raw_title)
+
+        if 'entries' in info and info['entries']:
+            info = info['entries'][0]
+        raw_title = info.get('title', 'downloaded_video')
+        safe_title = sanitize_filename(raw_title)
 
         matching_files = glob.glob(os.path.join(task_dir, '*'))
         if not matching_files:
