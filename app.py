@@ -9,6 +9,7 @@ import threading
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from flask import Flask, render_template, request, jsonify, send_file, after_this_request
 import yt_dlp
+from articles_data import BLOG_ARTICLES, ARTICLES_BY_SLUG
 
 try:
     from yt_dlp.networking.impersonate import ImpersonateTarget
@@ -184,6 +185,46 @@ SEO_CONFIGS = {
         'h1_hl': 'Clean & 100% Ad-Free!',
         'subtitle': 'Tired of 50 popups and virus alerts on SaveFrom? Download any video in full HD safely in seconds.',
         'canonical': 'https://social-video-downloader-ruby.vercel.app/savefrom-alternative',
+    },
+    'threads': {
+        'title': 'Threads Video Downloader Without Watermark (HD MP4) — Clipwave',
+        'meta_desc': 'Download Threads videos without watermark in Full HD MP4. Free online Meta Threads video downloader for iPhone, Android, and PC. 100% free, fast, no ads, no sign-up.',
+        'h1_top': 'Download Threads Videos.',
+        'h1_hl': 'Without Watermark!',
+        'subtitle': 'Paste any Threads post link to save original 1080p MP4 video directly to your camera roll.',
+        'canonical': 'https://social-video-downloader-ruby.vercel.app/threads-video-downloader',
+    },
+    'reddit': {
+        'title': 'Reddit Video Downloader With Audio & Sound (HD MP4) — Clipwave',
+        'meta_desc': 'Download Reddit videos with merged sound and audio in 1080p Full HD MP4. Fix silent Reddit downloads free online with zero ads.',
+        'h1_top': 'Download Reddit Videos.',
+        'h1_hl': 'With Full Audio!',
+        'subtitle': 'Save Reddit videos with merged crystal-clear audio and video in Full HD MP4 in seconds.',
+        'canonical': 'https://social-video-downloader-ruby.vercel.app/reddit-downloader',
+    },
+    'pinterest': {
+        'title': 'Pinterest Video Downloader (HD MP4 & GIF) — Clipwave',
+        'meta_desc': 'Download Pinterest videos, ideas, and GIFs in high definition MP4 for free. Save pins directly to camera roll with no watermark.',
+        'h1_top': 'Download Pinterest Videos.',
+        'h1_hl': 'Full HD & GIFs!',
+        'subtitle': 'Paste any Pinterest pin link to download HD video or GIF without watermarks.',
+        'canonical': 'https://social-video-downloader-ruby.vercel.app/pinterest-downloader',
+    },
+    'bilibili': {
+        'title': 'Bilibili Video Downloader (HD MP4 Online) — Clipwave',
+        'meta_desc': 'Download Bilibili videos in HD MP4 online for free. Fast Bilibili video saver without software.',
+        'h1_top': 'Download Bilibili Videos.',
+        'h1_hl': 'Fast Online MP4!',
+        'subtitle': 'Save Bilibili anime clips and videos in high quality MP4 directly.',
+        'canonical': 'https://social-video-downloader-ruby.vercel.app/bilibili-downloader',
+    },
+    'soundcloud': {
+        'title': 'SoundCloud Downloader to MP3 (High Quality) — Clipwave',
+        'meta_desc': 'Download SoundCloud tracks and songs to MP3 audio online for free. High quality 192k audio extractor.',
+        'h1_top': 'Download SoundCloud to MP3.',
+        'h1_hl': '192k Audio Track!',
+        'subtitle': 'Extract audio from any SoundCloud track directly into high quality MP3 format.',
+        'canonical': 'https://social-video-downloader-ruby.vercel.app/soundcloud-downloader',
     }
 }
 
@@ -196,28 +237,75 @@ def savefrom_alt_page():
     return render_template('index.html', seo=SEO_CONFIGS['savefrom_alt'])
 
 @app.route('/youtube-downloader')
+@app.route('/youtube-video-downloader')
 def youtube_page():
     return render_template('index.html', seo=SEO_CONFIGS['youtube'])
 
 @app.route('/tiktok-downloader')
+@app.route('/tiktok-downloader-without-watermark')
 def tiktok_page():
     return render_template('index.html', seo=SEO_CONFIGS['tiktok'])
 
 @app.route('/instagram-downloader')
+@app.route('/instagram-reels-downloader')
 def instagram_page():
     return render_template('index.html', seo=SEO_CONFIGS['instagram'])
 
 @app.route('/twitter-downloader')
+@app.route('/x-video-downloader')
 def twitter_page():
     return render_template('index.html', seo=SEO_CONFIGS['twitter'])
 
 @app.route('/facebook-downloader')
+@app.route('/facebook-video-downloader')
 def facebook_page():
     return render_template('index.html', seo=SEO_CONFIGS['facebook'])
 
 @app.route('/youtube-to-mp3')
 def mp3_page():
     return render_template('index.html', seo=SEO_CONFIGS['mp3'])
+
+@app.route('/threads-video-downloader')
+@app.route('/threads-downloader')
+def threads_page():
+    return render_template('index.html', seo=SEO_CONFIGS['threads'])
+
+@app.route('/reddit-video-downloader')
+@app.route('/reddit-downloader')
+def reddit_page():
+    return render_template('index.html', seo=SEO_CONFIGS['reddit'])
+
+@app.route('/pinterest-video-downloader')
+@app.route('/pinterest-downloader')
+def pinterest_page():
+    return render_template('index.html', seo=SEO_CONFIGS['pinterest'])
+
+@app.route('/bilibili-video-downloader')
+@app.route('/bilibili-downloader')
+def bilibili_page():
+    return render_template('index.html', seo=SEO_CONFIGS['bilibili'])
+
+@app.route('/soundcloud-downloader')
+def soundcloud_page():
+    return render_template('index.html', seo=SEO_CONFIGS['soundcloud'])
+
+# Blog & Guides Routes
+@app.route('/blog')
+def blog_index():
+    return render_template('blog_index.html', articles=BLOG_ARTICLES)
+
+@app.route('/blog/<slug>')
+def blog_post(slug):
+    article = ARTICLES_BY_SLUG.get(slug)
+    if not article:
+        return render_template('blog_index.html', articles=BLOG_ARTICLES), 404
+    related = [a for a in BLOG_ARTICLES if a['slug'] != slug][:3]
+    return render_template('blog_post.html', article=article, related_articles=related)
+
+# Google Search Console HTML File Verification Route
+@app.route('/google<string:token>.html')
+def google_verification(token):
+    return f"google-site-verification: google{token}.html", 200, {'Content-Type': 'text/plain'}
 
 @app.route('/sw.js')
 def service_worker():
@@ -266,22 +354,33 @@ Sitemap: https://social-video-downloader-ruby.vercel.app/sitemap.xml
 
 @app.route('/sitemap.xml')
 def sitemap():
+    base_url = 'https://social-video-downloader-ruby.vercel.app'
     urls = [
-        ('https://social-video-downloader-ruby.vercel.app/', '1.0'),
-        ('https://social-video-downloader-ruby.vercel.app/youtube-downloader', '0.9'),
-        ('https://social-video-downloader-ruby.vercel.app/tiktok-downloader', '0.9'),
-        ('https://social-video-downloader-ruby.vercel.app/instagram-downloader', '0.9'),
-        ('https://social-video-downloader-ruby.vercel.app/twitter-downloader', '0.8'),
-        ('https://social-video-downloader-ruby.vercel.app/facebook-downloader', '0.8'),
-        ('https://social-video-downloader-ruby.vercel.app/youtube-to-mp3', '0.9'),
-        ('https://social-video-downloader-ruby.vercel.app/savefrom-alternative', '0.9'),
+        (f'{base_url}/', '1.0', 'daily'),
+        (f'{base_url}/threads-video-downloader', '0.9', 'daily'),
+        (f'{base_url}/tiktok-downloader', '0.9', 'daily'),
+        (f'{base_url}/youtube-downloader', '0.9', 'daily'),
+        (f'{base_url}/instagram-downloader', '0.9', 'daily'),
+        (f'{base_url}/twitter-downloader', '0.8', 'daily'),
+        (f'{base_url}/facebook-downloader', '0.8', 'daily'),
+        (f'{base_url}/reddit-downloader', '0.8', 'daily'),
+        (f'{base_url}/pinterest-downloader', '0.8', 'daily'),
+        (f'{base_url}/bilibili-downloader', '0.8', 'daily'),
+        (f'{base_url}/soundcloud-downloader', '0.8', 'daily'),
+        (f'{base_url}/youtube-to-mp3', '0.9', 'daily'),
+        (f'{base_url}/savefrom-alternative', '0.9', 'daily'),
+        (f'{base_url}/blog', '0.8', 'daily'),
     ]
+    # Dynamically add all blog articles
+    for article in BLOG_ARTICLES:
+        urls.append((f"{base_url}/blog/{article['slug']}", '0.9', 'weekly'))
+
     xml_entries = "\n".join([f"""  <url>
     <loc>{url}</loc>
-    <lastmod>2026-11-07</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>{freq}</changefreq>
     <priority>{prio}</priority>
-  </url>""" for url, prio in urls])
+  </url>""" for url, prio, freq in urls])
 
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
