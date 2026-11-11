@@ -10,24 +10,40 @@
 <meta name="author" content="Clipwave">
 <link rel="canonical" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
 
+<!-- Canonical & International Hreflang Multi-Language Targeting -->
+<link rel="canonical" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="x-default" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="en" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="es" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="pt" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="id" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="vi" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="fr" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="de" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<link rel="alternate" hreflang="ja" href="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+
 <!-- Google Search Console Verification Meta Tag -->
 {% if gsc_code %}
 <meta name="google-site-verification" content="{{ gsc_code }}">
 {% endif %}
 <meta name="google-site-verification" content="google-site-verification-clipwave-token">
 
-<!-- Open Graph / Social Sharing -->
+<!-- Open Graph / Social Sharing (Dynamic per-landing-page) -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://social-video-downloader-ruby.vercel.app/">
-<meta property="og:title" content="Clipwave — Best Free Online Video Downloader">
-<meta property="og:description" content="Save any video in seconds! Fast, free, no sign-up required. Download YouTube, TikTok, Reels, & Twitter in 1080p MP4 or MP3.">
+<meta property="og:url" content="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<meta property="og:title" content="{{ seo.title if seo else 'Clipwave — Best Free Online Video Downloader' }}">
+<meta property="og:description" content="{{ seo.meta_desc if seo else 'Save any video in seconds! Fast, free, no sign-up required. Download YouTube, TikTok, Reels, & Twitter in 1080p MP4 or MP3.' }}">
+<meta property="og:image" content="https://social-video-downloader-ruby.vercel.app/static/icons/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
 <meta property="og:site_name" content="Clipwave">
 
-<!-- Twitter Card -->
+<!-- Twitter Card (Dynamic) -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://social-video-downloader-ruby.vercel.app/">
-<meta name="twitter:title" content="Clipwave — Best Free Online Video Downloader">
-<meta name="twitter:description" content="Download YouTube, TikTok, and social media videos in seconds in Full HD MP4 & MP3.">
+<meta name="twitter:url" content="{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}">
+<meta name="twitter:title" content="{{ seo.title if seo else 'Clipwave — Best Free Online Video Downloader' }}">
+<meta name="twitter:description" content="{{ seo.meta_desc if seo else 'Download YouTube, TikTok, and social media videos in seconds in Full HD MP4 & MP3.' }}">
+<meta name="twitter:image" content="https://social-video-downloader-ruby.vercel.app/static/icons/icon-512.png">
 
 <!-- Mobile Theme Color & PWA App Manifest -->
 <meta name="theme-color" content="#BDE7FF">
@@ -39,18 +55,18 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 
-<!-- JSON-LD Structured Data Schema for Google Search Engine Rankings -->
+<!-- Top-Tier JSON-LD Structured Data Schema for Google Search Engine Rankings & Rich Snippets -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebApplication",
-      "@id": "https://social-video-downloader-ruby.vercel.app/#webapp",
-      "name": "Clipwave Free Video Downloader",
-      "url": "https://social-video-downloader-ruby.vercel.app/",
+      "@id": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}#webapp",
+      "name": "{{ seo.title if seo else 'Clipwave Free Video Downloader' }}",
+      "url": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}",
       "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All (Windows, macOS, iOS, Android, Linux)",
+      "operatingSystem": "All (iOS, Android, Windows, macOS, Linux)",
       "browserRequirements": "Requires JavaScript",
       "offers": {
         "@type": "Offer",
@@ -64,18 +80,72 @@
         "worstRating": "1",
         "ratingCount": "128400"
       },
-      "description": "Fast free online tool to download videos and audio from YouTube, TikTok, Instagram, Twitter/X, and Facebook in MP4 or MP3."
+      "description": "{{ seo.meta_desc if seo else 'Fast free online tool to download videos and audio from YouTube, TikTok, Instagram, Twitter/X, and Facebook in MP4 or MP3.' }}"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://social-video-downloader-ruby.vercel.app/#organization",
+      "name": "Clipwave",
+      "url": "https://social-video-downloader-ruby.vercel.app/",
+      "logo": "https://social-video-downloader-ruby.vercel.app/static/icons/icon-512.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://social-video-downloader-ruby.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ seo.h1_hl if seo else 'Video Downloader' }}",
+          "item": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}#howto",
+      "name": "How to Download Videos Free Online with Clipwave",
+      "description": "Follow these 3 simple steps to save videos from YouTube, TikTok without watermark, Threads, and Instagram Reels.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Copy Video Link",
+          "text": "Copy the URL of the public video from YouTube, TikTok, Threads, or Instagram.",
+          "url": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}#step1"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Paste in Clipwave",
+          "text": "Paste the video link into Clipwave and select your desired format (1080p MP4 or 320k MP3).",
+          "url": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}#step2"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Download and Save",
+          "text": "Tap Download to save the clean file directly to your camera roll or PC storage.",
+          "url": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}#step3"
+        }
+      ]
     },
     {
       "@type": "FAQPage",
-      "@id": "https://social-video-downloader-ruby.vercel.app/#faq",
+      "@id": "{{ seo.canonical if seo else 'https://social-video-downloader-ruby.vercel.app/' }}#faq",
       "mainEntity": [
         {
           "@type": "Question",
           "name": "What kind of links work on Clipwave?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Clipwave supports links to public videos from YouTube, YouTube Shorts, TikTok without watermark, Instagram Reels, Twitter/X, Facebook, and Reddit."
+            "text": "Clipwave supports links to public videos from YouTube, YouTube Shorts, Threads without watermark, TikTok without watermark, Instagram Reels, Twitter/X, Facebook, and Reddit."
           }
         },
         {
@@ -83,7 +153,7 @@
           "name": "Which formats can I choose?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can download high definition MP4 videos (1080p, 720p, 480p, 360p) or audio only as high quality MP3 (192kbps) and M4A."
+            "text": "You can download high definition MP4 videos (1080p, 720p, 480p, 360p) or audio only as high quality MP3 (320kbps & 192kbps) and M4A."
           }
         },
         {

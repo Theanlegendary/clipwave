@@ -28,6 +28,10 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
     response.headers['Access-Control-Allow-Methods'] = 'GET,POST,OPTIONS'
+    # Elite SEO Crawler Directives
+    response.headers['X-Robots-Tag'] = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
     return response
 
 @app.route('/api/info', methods=['OPTIONS'])
@@ -369,43 +373,76 @@ def manifest():
 
 @app.route('/robots.txt')
 def robots():
-    return """User-agent: *
+    content = """User-agent: *
 Allow: /
+Disallow: /api/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /static/
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
 Sitemap: https://social-video-downloader-ruby.vercel.app/sitemap.xml
-""", 200, {'Content-Type': 'text/plain'}
+"""
+    return content, 200, {'Content-Type': 'text/plain'}
 
 @app.route('/sitemap.xml')
 def sitemap():
     base_url = 'https://social-video-downloader-ruby.vercel.app'
     urls = [
-        (f'{base_url}/', '1.0', 'daily'),
-        (f'{base_url}/threads-video-downloader', '0.9', 'daily'),
-        (f'{base_url}/tiktok-downloader', '0.9', 'daily'),
-        (f'{base_url}/youtube-downloader', '0.9', 'daily'),
-        (f'{base_url}/instagram-downloader', '0.9', 'daily'),
-        (f'{base_url}/twitter-downloader', '0.8', 'daily'),
-        (f'{base_url}/facebook-downloader', '0.8', 'daily'),
-        (f'{base_url}/reddit-downloader', '0.8', 'daily'),
-        (f'{base_url}/pinterest-downloader', '0.8', 'daily'),
-        (f'{base_url}/bilibili-downloader', '0.8', 'daily'),
-        (f'{base_url}/soundcloud-downloader', '0.8', 'daily'),
-        (f'{base_url}/youtube-to-mp3', '0.9', 'daily'),
-        (f'{base_url}/savefrom-alternative', '0.9', 'daily'),
-        (f'{base_url}/blog', '0.8', 'daily'),
+        (f'{base_url}/', '1.0', 'daily', 'Download all Video Free — Clipwave'),
+        (f'{base_url}/threads-video-downloader', '0.9', 'daily', 'Threads Video Downloader Without Watermark'),
+        (f'{base_url}/tiktok-downloader', '0.9', 'daily', 'TikTok Video Downloader Without Watermark'),
+        (f'{base_url}/youtube-downloader', '0.9', 'daily', 'YouTube Video Downloader 1080p HD'),
+        (f'{base_url}/instagram-downloader', '0.9', 'daily', 'Instagram Reels & Video Downloader'),
+        (f'{base_url}/twitter-downloader', '0.8', 'daily', 'Twitter / X Video Downloader'),
+        (f'{base_url}/facebook-downloader', '0.8', 'daily', 'Facebook Video Downloader'),
+        (f'{base_url}/reddit-downloader', '0.8', 'daily', 'Reddit Video Downloader With Audio'),
+        (f'{base_url}/pinterest-downloader', '0.8', 'daily', 'Pinterest Video Downloader'),
+        (f'{base_url}/bilibili-downloader', '0.8', 'daily', 'Bilibili Video Downloader'),
+        (f'{base_url}/soundcloud-downloader', '0.8', 'daily', 'SoundCloud Downloader to MP3'),
+        (f'{base_url}/youtube-to-mp3', '0.9', 'daily', 'YouTube to MP3 Converter 320k'),
+        (f'{base_url}/savefrom-alternative', '0.9', 'daily', 'Best Safe SaveFrom Alternative'),
+        (f'{base_url}/blog', '0.8', 'daily', 'Clipwave Video Downloading Guides & Blog'),
     ]
-    # Dynamically add all blog articles
     for article in BLOG_ARTICLES:
-        urls.append((f"{base_url}/blog/{article['slug']}", '0.9', 'weekly'))
+        urls.append((f"{base_url}/blog/{article['slug']}", '0.9', 'weekly', article['title']))
 
+    langs = ['en', 'es', 'pt', 'id', 'vi', 'fr', 'de', 'ja']
+    
     xml_entries = "\n".join([f"""  <url>
     <loc>{url}</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>{freq}</changefreq>
     <priority>{prio}</priority>
-  </url>""" for url, prio, freq in urls])
+    <image:image>
+      <image:loc>{base_url}/static/icons/icon-512.png</image:loc>
+      <image:title>{title}</image:title>
+    </image:image>
+    """ + "\n    ".join([f'<xhtml:link rel="alternate" hreflang="{lang}" href="{url}"/>' for lang in langs]) + f"""
+  </url>""" for url, prio, freq, title in urls])
 
     return f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {xml_entries}
 </urlset>
 """, 200, {'Content-Type': 'application/xml'}
