@@ -106,7 +106,7 @@ def get_base_ydl_opts(url=None):
         'remote_components': ['ejs:github'],
         'extractor_args': {
             'youtube': {
-                'player_client': ['mweb', 'web_embedded', 'ios'],
+                'player_client': ['web', 'android', 'ios'],
                 'player_skip': ['configs'],
             }
         }
@@ -306,8 +306,22 @@ def fetch_info():
     }
 
     try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(target_url, download=False)
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(target_url, download=False)
+        except Exception as first_err:
+            if 'youtube' in target_url or 'youtu.be' in target_url:
+                fallback_opts = dict(ydl_opts)
+                fallback_opts['extractor_args'] = {
+                    'youtube': {
+                        'player_client': ['android', 'ios'],
+                        'player_skip': ['configs'],
+                    }
+                }
+                with yt_dlp.YoutubeDL(fallback_opts) as ydl_fallback:
+                    info = ydl_fallback.extract_info(target_url, download=False)
+            else:
+                raise first_err
             
             if 'entries' in info and info['entries']:
                 info = info['entries'][0]
@@ -438,8 +452,22 @@ def download():
         mime_type = 'video/mp4'
 
     try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(target_url, download=True)
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(target_url, download=True)
+        except Exception as first_dl_err:
+            if 'youtube' in target_url or 'youtu.be' in target_url:
+                fallback_ydl_opts = dict(ydl_opts)
+                fallback_ydl_opts['extractor_args'] = {
+                    'youtube': {
+                        'player_client': ['android', 'ios'],
+                        'player_skip': ['configs'],
+                    }
+                }
+                with yt_dlp.YoutubeDL(fallback_ydl_opts) as ydl_fallback:
+                    info = ydl_fallback.extract_info(target_url, download=True)
+            else:
+                raise first_dl_err
             if 'entries' in info and info['entries']:
                 info = info['entries'][0]
             raw_title = info.get('title', 'downloaded_video')

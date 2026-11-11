@@ -465,29 +465,109 @@
     display: none;
   }
 
-  /* ================= LOADING CARD (MATCHING USER SCREENSHOT) ================= */
-  .loading-card-container {
-    padding: 0 24px 36px;
-    max-width: 680px;
-    margin: 0 auto;
+  /* ================= LOADING POPUP MODAL (MATCHING USER SCREENSHOT) ================= */
+  .loading-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(27, 27, 58, 0.68);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.22s ease-out;
+  }
+  .loading-modal-backdrop.active {
+    display: flex;
+    opacity: 1;
   }
   .loading-card {
+    position: relative;
     background: #FFFFFF;
     border: 3.5px solid var(--ink);
-    border-radius: 28px;
-    box-shadow: 8px 8px 0 var(--ink);
-    padding: 46px 36px 40px;
+    border-radius: 32px;
+    box-shadow: 10px 10px 0 var(--ink);
+    padding: 48px 32px 38px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 24px;
-    animation: fadeInLoadingCard 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    gap: 22px;
+    width: 100%;
+    max-width: 440px;
+    box-sizing: border-box;
+    animation: popInLoadingModal 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  @keyframes fadeInLoadingCard {
-    from { opacity: 0; transform: translateY(12px) scale(0.97); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+  @keyframes popInLoadingModal {
+    from { opacity: 0; transform: scale(0.86) translateY(18px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .loading-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #F1F5F9;
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--ink);
+    transition: all 0.15s ease;
+    box-shadow: 2px 2px 0 var(--ink);
+    line-height: 1;
+    padding: 0;
+    z-index: 10;
+  }
+  .loading-close-btn:hover {
+    background: #FF4F93;
+    color: #FFFFFF;
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .loading-badge-flower {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    animation: floatFlower 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .loading-badge-star {
+    position: absolute;
+    top: 38%;
+    right: -14px;
+    font-size: 26px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    animation: floatStar 2.6s ease-in-out infinite 0.5s;
+    pointer-events: none;
+    z-index: 10;
+  }
+  @keyframes floatFlower {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    50% { transform: translateX(-50%) translateY(-5px) rotate(8deg); }
+  }
+  @keyframes floatStar {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(-10deg); }
   }
 
   /* Circular Radar / Spinner with Orbiting Dots */
@@ -881,9 +961,16 @@
     </div>
   </main>
 
-  <!-- ================= LOADING STATE CARD (MATCHING USER SCREENSHOT) ================= -->
-  <div class="container loading-card-container" id="loadingCardArea" style="display: none;">
-    <div class="loading-card">
+  <!-- ================= LOADING POPUP MODAL (MATCHING USER SCREENSHOT) ================= -->
+  <div class="loading-modal-backdrop" id="loadingModalArea" role="dialog" aria-modal="true" aria-labelledby="loadingStatusMsg">
+    <div class="loading-card" id="loadingCardBox">
+      <!-- Decorative Anime / Aesthetic Badges matching user screenshot -->
+      <span class="loading-badge-flower" aria-hidden="true">🌸</span>
+      <span class="loading-badge-star" aria-hidden="true">⭐</span>
+
+      <!-- Close / Dismiss button -->
+      <button type="button" class="loading-close-btn" id="btnCloseLoadingModal" title="Cancel" aria-label="Close modal">✕</button>
+
       <div class="radar-box">
         <!-- Concentric ripples -->
         <div class="radar-ripple r1"></div>
@@ -913,7 +1000,7 @@
 
       <!-- Loading Status Text -->
       <div class="loading-status-text">
-        <span id="loadingStatusMsg">Fetching video info</span><span class="animated-dots"><span>.</span><span>.</span><span>.</span></span>
+        <span id="loadingStatusMsg">Preparing download links</span><span class="animated-dots"><span>.</span><span>.</span><span>.</span></span>
       </div>
     </div>
   </div>
@@ -1278,18 +1365,51 @@
     });
   });
 
-  // Form submission handler with Animated Loading Card
+  // Form submission handler with Animated Loading Modal Dialog
   const form = document.getElementById('dl-form');
   const input = document.getElementById('video-url');
   const status = document.getElementById('status');
   const btnDownload = document.getElementById('btnDownload');
   const btnText = document.getElementById('btnText');
   const resultCardArea = document.getElementById('resultCardArea');
-  const loadingCardArea = document.getElementById('loadingCardArea');
+  const loadingModalArea = document.getElementById('loadingModalArea');
+  const btnCloseLoadingModal = document.getElementById('btnCloseLoadingModal');
   const loadProgressBar = document.getElementById('loadProgressBar');
   const loadingStatusMsg = document.getElementById('loadingStatusMsg');
 
   let loadInterval = null;
+  let activeFetchController = null;
+
+  function closeLoadingModal() {
+    if (loadInterval) {
+      clearInterval(loadInterval);
+      loadInterval = null;
+    }
+    if (activeFetchController) {
+      activeFetchController.abort();
+      activeFetchController = null;
+    }
+    loadingModalArea.classList.remove('active');
+    btnText.textContent = 'Download';
+    btnDownload.disabled = false;
+    btnDownload.style.opacity = '1';
+  }
+
+  if (btnCloseLoadingModal) {
+    btnCloseLoadingModal.addEventListener('click', closeLoadingModal);
+  }
+  if (loadingModalArea) {
+    loadingModalArea.addEventListener('click', (e) => {
+      if (e.target === loadingModalArea) {
+        closeLoadingModal();
+      }
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && loadingModalArea.classList.contains('active')) {
+      closeLoadingModal();
+    }
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -1305,11 +1425,10 @@
     status.textContent = '';
     resultCardArea.style.display = 'none';
 
-    // Show Loading Card matching user screenshot
-    loadingCardArea.style.display = 'block';
+    // Show Loading Modal Popup matching user screenshot
+    loadingModalArea.classList.add('active');
     loadProgressBar.style.width = '20%';
-    loadingStatusMsg.textContent = 'Fetching video info';
-    loadingCardArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    loadingStatusMsg.textContent = 'Preparing download links';
 
     btnText.textContent = 'Checking...';
     btnDownload.disabled = true;
@@ -1329,13 +1448,16 @@
           loadingStatusMsg.textContent = 'Preparing download links';
         }
       }
-    }, 400);
+    }, 350);
+
+    activeFetchController = new AbortController();
 
     try {
       const res = await fetch('/api/info', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
+        body: JSON.stringify({ url }),
+        signal: activeFetchController.signal
       });
 
       const data = await res.json();
@@ -1349,7 +1471,7 @@
       loadingStatusMsg.textContent = 'Video ready!';
 
       setTimeout(() => {
-        loadingCardArea.style.display = 'none';
+        loadingModalArea.classList.remove('active');
 
         // Populate Result Card with Split Dropdown
         document.getElementById('cardThumb').src = data.thumbnail || '';
@@ -1364,8 +1486,9 @@
       }, 350);
 
     } catch (err) {
+      if (err.name === 'AbortError') return;
       clearInterval(loadInterval);
-      loadingCardArea.style.display = 'none';
+      loadingModalArea.classList.remove('active');
       status.style.color = '#E11D48';
       status.textContent = err.message;
     } finally {
