@@ -253,6 +253,45 @@
   h1{font-size:clamp(38px,5.6vw,68px);line-height:1.12;letter-spacing:-.02em;text-shadow:4px 4px 0 #fff}
   h1 .hl{color:var(--accent);-webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--ink)}
   .lead{max-width:520px;font-size:19px;line-height:1.6;font-weight:500;color:var(--muted)}
+  .hero-platforms-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0 18px 0;
+    max-width: 530px;
+  }
+  .plat-label {
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-right: 2px;
+  }
+  .plat-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: #FFFFFF;
+    border: 1.8px solid var(--ink);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.2;
+    box-shadow: 1.5px 1.5px 0 var(--ink);
+    white-space: nowrap;
+  }
+  .plat-tag.yt { color: #DC2626; }
+  .plat-tag.tt { color: #0891B2; }
+  .plat-tag.ig { color: #DB2777; }
+  .plat-tag.tw { color: #0284C7; }
+  .plat-tag.fb { color: #2563EB; }
+  .plat-tag.rd { color: #EA580C; }
+  .plat-tag.pin { color: #E11D48; }
+  .plat-tag.thr { color: #1E293B; }
+  .plat-tag.bb { color: #0284C7; }
+  .plat-tag.sc { color: #F97316; }
  
   .url-box{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px;border-radius:24px;background:#fff;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
   .url-field{flex:1 1 240px;min-width:0;display:flex;align-items:center;gap:12px;padding:0 10px}
@@ -847,7 +886,21 @@
     <div class="hero-copy">
       <div class="badge"><span class="jp" aria-hidden="true">ダウンロード</span> Free video saver</div>
       <h1>{{ seo.h1_top if seo else 'Save any video.' }}<br><span class="hl">{{ seo.h1_hl if seo else 'Keep it forever!' }}</span></h1>
-      <p class="lead">{{ seo.subtitle if seo else 'Paste a link, pick your power level, and download. No sign-up, no software, no side quests.' }}</p>
+      <p class="lead">{{ seo.subtitle if seo else 'Paste any video link to download in HD MP4 or 192k MP3 audio. 100% free, no ads, no viruses, no side quests.' }}</p>
+
+      <div class="hero-platforms-bar" aria-label="Supported Platforms">
+        <span class="plat-label">Supports:</span>
+        <span class="plat-tag yt">YouTube &amp; Shorts</span>
+        <span class="plat-tag tt">TikTok No Watermark</span>
+        <span class="plat-tag ig">Instagram Reels</span>
+        <span class="plat-tag tw">Twitter / X</span>
+        <span class="plat-tag fb">Facebook</span>
+        <span class="plat-tag rd">Reddit</span>
+        <span class="plat-tag pin">Pinterest</span>
+        <span class="plat-tag thr">Threads</span>
+        <span class="plat-tag bb">Bilibili</span>
+        <span class="plat-tag sc">SoundCloud</span>
+      </div>
  
       <form class="url-box" id="dl-form" novalidate>
         <label for="video-url" class="sr-only">Video link</label>
@@ -875,20 +928,6 @@
         </div>
       </div>
  
-      <div class="perks">
-        <span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFD93D" stroke="#1B1B3A" stroke-width="2.4"/><path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Free to use</span>
-        <span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFD93D" stroke="#1B1B3A" stroke-width="2.4"/><path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No account needed</span>
-        <span><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFD93D" stroke="#1B1B3A" stroke-width="2.4"/><path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="#1B1B3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Phone and desktop</span>
-      </div>
-
-      <!-- SEO Platform Tags for Google Search Ranking -->
-      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;" aria-label="Supported Platforms">
-        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #DC2626;">YouTube & Shorts</span>
-        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #0891B2;">TikTok No Watermark</span>
-        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #DB2777;">Instagram Reels</span>
-        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #0284C7;">Twitter / X</span>
-        <span style="padding: 4px 12px; border-radius: 8px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; color: #2563EB;">Facebook</span>
-      </div>
 
       <!-- App Download Promotion Banner (Web-to-App Funnel) -->
       <div style="margin-top: 14px; padding: 12px 18px; border-radius: 18px; background: #FFF8EE; border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
