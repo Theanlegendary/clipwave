@@ -5,10 +5,12 @@ import glob
 import uuid
 import shutil
 import tempfile
+import io
 import threading
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 from flask import Flask, render_template, request, jsonify, send_file, after_this_request
 import yt_dlp
+import qrcode
 from articles_data import BLOG_ARTICLES, ARTICLES_BY_SLUG
 
 try:
@@ -307,6 +309,26 @@ def blog_post(slug):
 def google_verification(token):
     return f"google-site-verification: google{token}.html", 200, {'Content-Type': 'text/plain'}
 
+@app.route('/api/qr')
+def generate_qr():
+    """Generate high-contrast QR code locally on demand without third-party network dependencies."""
+    data = request.args.get('data', '').strip()
+    if not data:
+        return 'Missing data parameter', 400
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_M,
+        box_size=10,
+        border=2,
+    )
+    qr.add_data(data)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="#1B1B3A", back_color="#FFFFFF")
+    buf = io.BytesIO()
+    img.save(buf, format='PNG')
+    buf.seek(0)
+    return send_file(buf, mimetype='image/png')
+
 @app.route('/sw.js')
 def service_worker():
     return send_file(os.path.join(os.path.dirname(__file__), 'static', 'sw.js'), mimetype='application/javascript')
@@ -492,7 +514,20 @@ def download():
         **get_base_ydl_opts(target_url),
     }
 
-    if quality == 'audio' or quality == 'mp3':
+    if quality in ('audio_320', '320k', '320'):
+        ydl_opts = {
+            **common_opts,
+            'format': 'bestaudio/best',
+            'outtmpl': out_template,
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '320',
+            }],
+        }
+        target_ext = '.mp3'
+        mime_type = 'audio/mpeg'
+    elif quality == 'audio' or quality == 'mp3':
         ydl_opts = {
             **common_opts,
             'format': 'bestaudio/best',
