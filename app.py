@@ -122,10 +122,10 @@ def get_base_ydl_opts(url=None):
 
 SEO_CONFIGS = {
     'default': {
-        'title': 'Download YouTube Videos for Free, TikTok & Reels — Clipwave',
+        'title': 'Download all Video Free — Clipwave',
         'meta_desc': 'Download YouTube videos for free in 1080p Full HD, TikTok without watermark, and Instagram Reels. 100% free, fast, no ads, no sign-up, no app install required.',
-        'h1_top': 'Download YouTube Videos for Free.',
-        'h1_hl': 'Plus TikTok & Reels!',
+        'h1_top': 'Download all',
+        'h1_hl': 'Video Free',
         'subtitle': 'Paste any video link to download in HD MP4 or 192k MP3 audio. 100% free, no ads, no viruses, no side quests.',
         'canonical': 'https://social-video-downloader-ruby.vercel.app/',
     },
