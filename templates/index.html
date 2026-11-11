@@ -189,107 +189,6 @@
     --green-bright:#10b981;
   }
 
-  /* ============ Dark Theme Tokens & Overrides ============ */
-  [data-theme="dark"] {
-    --ink: #FFFFFF;
-    --accent: #FF4F93;
-    --yellow: #FFD93D;
-    --sky: #13172A;
-    --purple: #9D7CFF;
-    --cream: #0D0F1D;
-    --muted: #C4C8E0;
-    --green: #10B981;
-  }
-  [data-theme="dark"] body {
-    background: #0D0F1D;
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] .hero {
-    background-color: #13172A;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.12) 2px, transparent 2.2px);
-  }
-  [data-theme="dark"] .url-box {
-    background: #181C33;
-    border-color: #40466E;
-    box-shadow: 8px 8px 0 #000;
-  }
-  [data-theme="dark"] .url-field input {
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] .url-field input::placeholder {
-    color: #8C93B8;
-  }
-  [data-theme="dark"] .btn-paste {
-    background: #252B4D;
-    color: #FFFFFF;
-    border-color: #40466E;
-  }
-  [data-theme="dark"] .result-card {
-    background: #181C33;
-    border-color: #40466E;
-    box-shadow: 10px 10px 0 #000;
-  }
-  [data-theme="dark"] .result-title {
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] details {
-    background: #181C33;
-    border-color: #40466E;
-    box-shadow: 5px 5px 0 #000;
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] details p {
-    color: #C4C8E0;
-  }
-  [data-theme="dark"] .feature {
-    background: #181C33;
-    border-color: #40466E;
-    box-shadow: 6px 6px 0 #000;
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] .feature p {
-    color: #C4C8E0;
-  }
-  [data-theme="dark"] .step {
-    background: #181C33;
-    border-color: #40466E;
-    box-shadow: 6px 6px 0 #000;
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] .badge {
-    background: #181C33;
-    color: #FFFFFF;
-    border-color: #40466E;
-  }
-  [data-theme="dark"] .plat-icon-btn {
-    background: #181C33;
-    border-color: #40466E;
-  }
-  [data-theme="dark"] h1 {
-    text-shadow: 4px 4px 0 #0D0F1D;
-  }
-  [data-theme="dark"] .recent-shelf-box {
-    background: #181C33;
-    border-color: #40466E;
-    box-shadow: 6px 6px 0 #000;
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] .recent-item-card {
-    background: #232847;
-    border-color: #40466E;
-    box-shadow: 3px 3px 0 #000;
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] .qr-card {
-    background: #181C33;
-    border-color: #40466E;
-    color: #FFFFFF;
-  }
-  [data-theme="dark"] .btn-clear-recents {
-    border-color: #40466E;
-    color: #C4C8E0;
-  }
-
   /* ============ Recent Downloads Shelf ============ */
   .recent-shelf-box {
     background: #FFFFFF;
@@ -433,12 +332,6 @@
   .btn-action-tool:hover {
     transform: translate(-1px, -1px);
     box-shadow: 3.5px 3.5px 0 var(--ink);
-  }
-  [data-theme="dark"] .btn-action-tool {
-    background: #232847;
-    border-color: #40466E;
-    color: #FFFFFF;
-    box-shadow: 2.5px 2.5px 0 #000;
   }
  
   /* ============ Live Moving Animations ============ */
@@ -1148,15 +1041,10 @@
   .cta h2{font-size:clamp(28px,4vw,44px)}
   .cta p{font-size:18px;line-height:1.6;font-weight:500;color:#E8E4FF}
   .cta a{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:18px 32px;border-radius:18px;background:var(--yellow);color:var(--ink);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);font-size:19px;font-weight:800}
-  footer{background:var(--ink);color:var(--cream);padding:60px 0 40px;border-top:4px solid var(--ink)}
-  .footer-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:36px;margin-bottom:40px}
-  .footer-col h4{font-family:var(--font-head);font-size:16px;color:var(--yellow);margin-bottom:16px;letter-spacing:0.5px}
-  .footer-col ul{list-style:none;padding:0;margin:0}
-  .footer-col li{margin-bottom:9px}
-  .footer-col a{color:#D9D6EE;text-decoration:none;font-size:14px;transition:color .15s}
-  .footer-col a:hover{color:var(--pink);text-decoration:underline}
-  .footer-col p{font-size:13.5px;line-height:1.65;color:#D9D6EE;margin-bottom:12px}
-  .footer-bottom{border-top:1.5px solid rgba(255,255,255,0.15);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#A5A1C9}
+  footer{background:var(--ink);color:var(--cream)}
+  .footer-inner{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:20px;padding-top:36px;padding-bottom:48px}
+  footer .logo{font-size:22px}
+  footer p{max-width:560px;font-size:14px;line-height:1.7;color:#D9D6EE}
 
   @media(max-width: 768px) {
     .result-thumb-box {
@@ -1198,9 +1086,6 @@
       <a href="https://github.com/Theanlegendary/clipwave-mobile/releases/latest/download/clipwave.apk" class="btn-apk" title="Download Android APK" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; border-radius: 999px; background: #00A859; color: #fff; border: 2.5px solid var(--ink); font-weight: 800; font-size: 14px; text-decoration: none; box-shadow: 2.5px 2.5px 0 var(--ink); transition: transform 0.15s;">
         <span>🤖</span> Android App
       </a>
-      <button type="button" id="themeToggleBtn" title="Toggle Dark/Light Mode" aria-label="Toggle theme" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #FFFFFF; border: 2.5px solid var(--ink); box-shadow: 2.5px 2.5px 0 var(--ink); cursor: pointer; font-size: 16px; transition: transform 0.15s;">
-        <span id="themeIcon">🌙</span>
-      </button>
       <a href="#get" class="btn-pill pop">Start</a>
     </nav>
   </header>
@@ -1566,19 +1451,6 @@
         <p>Tap Download and the file lands on your device, ready for offline watching.</p>
       </article>
     </div>
-
-    <!-- 1-Click Bookmarklet Tool -->
-    <div style="margin-top: 36px; padding: 22px 28px; background: #FFF; border: 3.5px solid var(--ink); border-radius: 20px; box-shadow: 6px 6px 0 var(--ink); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
-      <div>
-        <div style="font-family: 'Dela Gothic One', sans-serif; font-size: 16px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-          <span>⚡</span> Pro Tip: 1-Click Browser Bookmarklet
-        </div>
-        <p style="font-size: 14px; color: var(--muted); margin: 0;">Drag this button to your browser bookmarks bar. When viewing any YouTube, TikTok, or Reel, click it to download instantly!</p>
-      </div>
-      <a href="javascript:(function(){window.open('https://social-video-downloader-ruby.vercel.app/?url='+encodeURIComponent(window.location.href),'_blank');})();" class="btn-pill pop" style="font-size: 13.5px; padding: 10px 22px; text-transform: none;" onclick="alert('To install: Drag this button up to your browser bookmarks bar! Then click it anytime you want to save a video.'); return false;">
-        ⭐ Clipwave 1-Click
-      </a>
-    </div>
   </div>
 </section>
  
@@ -1703,64 +1575,23 @@
  
 <!-- ================= FOOTER ================= -->
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="logo" style="margin-bottom: 14px; color: #fff;">
-          <svg width="34" height="34" viewBox="0 0 44 44" aria-hidden="true"><rect x="3" y="3" width="38" height="38" rx="12" class="accent-fill" stroke="#FFF8EE" stroke-width="3"/><path d="M17 14 L31 22 L17 30 Z" fill="#fff" stroke="#1B1B3A" stroke-width="2.5" stroke-linejoin="round"/></svg>
-          Clipwave
-        </div>
-        <p>The clean, high-speed video downloader. Save Full HD MP4 and crystal-clear MP3 from 10+ social platforms with 0 ads and 0 popups.</p>
-        <p style="font-size: 12px; color: #8A85B8;">Clipwave is not affiliated with any video platform. Download only content you own or have permission to save.</p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Top Downloaders</h4>
-        <ul>
-          <li><a href="/threads-video-downloader">Threads Downloader (No Watermark)</a></li>
-          <li><a href="/tiktok-downloader">TikTok Downloader Without Watermark</a></li>
-          <li><a href="/youtube-downloader">YouTube Video Downloader (1080p)</a></li>
-          <li><a href="/youtube-to-mp3">YouTube to MP3 Converter (192k)</a></li>
-          <li><a href="/instagram-downloader">Instagram Reels Downloader</a></li>
-          <li><a href="/twitter-downloader">Twitter / X Video Downloader</a></li>
-          <li><a href="/facebook-downloader">Facebook Video Downloader</a></li>
-          <li><a href="/reddit-downloader">Reddit Video Downloader (With Audio)</a></li>
-          <li><a href="/pinterest-downloader">Pinterest Video Downloader</a></li>
-          <li><a href="/savefrom-alternative">SaveFrom.net Safe Alternative</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Step-by-Step Guides</h4>
-        <ul>
-          <li><a href="/blog/how-to-download-threads-videos-without-watermark">How to Download Threads Without Watermark</a></li>
-          <li><a href="/blog/how-to-download-tiktok-videos-without-watermark-iphone-android">Save TikTok Videos (iPhone &amp; Android)</a></li>
-          <li><a href="/blog/best-savefrom-alternatives-no-ads-no-viruses">Top 7 Safe SaveFrom Alternatives</a></li>
-          <li><a href="/blog/how-to-save-instagram-reels-in-1080p-camera-roll">Save Instagram Reels to Camera Roll</a></li>
-          <li><a href="/blog/how-to-convert-youtube-videos-to-mp3-320kbps">Convert YouTube to High Quality MP3</a></li>
-          <li><a href="/blog/how-to-download-reddit-videos-with-audio">Fix Muted Reddit Downloads with Audio</a></li>
-          <li><a href="/blog">Browse All Blog &amp; SEO Guides &rarr;</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Features &amp; Trust</h4>
-        <ul>
-          <li><span style="color: #4ADE80;">✔</span> 100% Free Forever</li>
-          <li><span style="color: #4ADE80;">✔</span> Zero Ads &amp; Pop-up Scams</li>
-          <li><span style="color: #4ADE80;">✔</span> Full HD 1080p Supported</li>
-          <li><span style="color: #4ADE80;">✔</span> No Account / Registration</li>
-          <li><span style="color: #4ADE80;">✔</span> Mobile &amp; Desktop Browser Ready</li>
-          <li><a href="https://github.com/Theanlegendary/clipwave-mobile/releases/latest/download/clipwave.apk" style="color: var(--yellow); font-weight: 700;">🤖 Download Free Android APK</a></li>
-        </ul>
-      </div>
+  <div class="container footer-inner">
+    <div class="logo">
+      <svg width="34" height="34" viewBox="0 0 44 44" aria-hidden="true"><rect x="3" y="3" width="38" height="38" rx="12" class="accent-fill" stroke="#FFF8EE" stroke-width="3"/><path d="M17 14 L31 22 L17 30 Z" fill="#fff" stroke="#1B1B3A" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      Clipwave
     </div>
-
-    <div class="footer-bottom">
-      <div>&copy; 2026 Clipwave. Built for pure speed and clean video downloads.</div>
-      <div>
-        <a href="/sitemap.xml" style="color: #A5A1C9; margin-right: 14px; text-decoration: none;">Sitemap.xml</a>
-        <a href="/robots.txt" style="color: #A5A1C9; text-decoration: none;">Robots.txt</a>
+    <div style="max-width: 580px;">
+      <p style="margin-bottom: 10px;">Clipwave is not affiliated with any video platform. Download only content you own or have permission to save, and follow the terms of the original service.</p>
+      <div style="font-size: 13px; color: #A5A1C9; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
+        <a href="/blog" style="color: var(--yellow); font-weight: 700; text-decoration: none;">Guides &amp; Blog</a>
+        <span>•</span>
+        <a href="/threads-video-downloader" style="color: #D9D6EE; text-decoration: none;">Threads Downloader</a>
+        <span>•</span>
+        <a href="/tiktok-downloader" style="color: #D9D6EE; text-decoration: none;">TikTok Downloader</a>
+        <span>•</span>
+        <a href="/youtube-downloader" style="color: #D9D6EE; text-decoration: none;">YouTube Downloader</a>
+        <span>•</span>
+        <a href="/sitemap.xml" style="color: #A5A1C9; text-decoration: none;">Sitemap.xml</a>
       </div>
     </div>
   </div>
@@ -2073,28 +1904,11 @@
     if (pwaBtn) pwaBtn.style.display = 'none';
   });
 
-  // ============ Theme Switcher (Dark / Light) ============
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const themeIcon = document.getElementById('themeIcon');
-  const savedTheme = localStorage.getItem('clipwave_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  if (savedTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    if (themeIcon) themeIcon.textContent = '☀️';
-  }
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('clipwave_theme', 'light');
-        if (themeIcon) themeIcon.textContent = '🌙';
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('clipwave_theme', 'dark');
-        if (themeIcon) themeIcon.textContent = '☀️';
-      }
-    });
-  }
+  // Ensure pure Light Mode (remove any legacy theme state)
+  try {
+    localStorage.removeItem('clipwave_theme');
+    document.documentElement.removeAttribute('data-theme');
+  } catch (e) {}
 
   // ============ Recent Downloads Shelf (localStorage) ============
   function saveToRecentDownloads(item) {
