@@ -104,16 +104,15 @@ def get_base_ydl_opts(url=None):
         'socket_timeout': 25,
         'js_runtimes': {'node': {}},
         'remote_components': ['ejs:github'],
+        'extractor_args': {
+            'youtube': {
+                'player_client': ['mweb', 'web_embedded', 'ios'],
+                'player_skip': ['configs'],
+            }
+        }
     }
     if os.path.exists(COOKIES_FILE):
         opts['cookiefile'] = COOKIES_FILE
-    else:
-        opts['extractor_args'] = {
-            'youtube': {
-                'player_client': ['ios', 'android', 'mweb'],
-                'player_skip': ['webpage', 'configs'],
-            }
-        }
 
     # TikTok enforces TLS fingerprint checks; use Chrome impersonate for TikTok
     if url and ('tiktok' in url or 'douyin' in url):
